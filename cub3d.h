@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/17 12:46:57 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:49:55 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include "libft/include/libft.h"
 # include "minilibx-linux/mlx.h"
 
+#define WIN_W 1280
+#define WIN_H 720
+
 typedef struct s_map
 {
 	char	*texture_north;
@@ -40,9 +43,54 @@ typedef struct s_map
 	char	player_dir;
 } t_map;
 
-void    exit_with_error(char *msg, t_map *map, char *str);
+typedef struct	s_raycast
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+}	t_raycast;
+
+typedef struct s_game
+{
+	t_map		*map;
+	t_raycast	raycast;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+}	t_game;
+
+typedef struct s_vec
+{
+    double x;
+    double y;
+}   t_vec;
+
 void 	map_init(t_map *map);
-void	start_map(char *argv);
+void 	start_map(char *argv, t_map *map);
 int 	array_len(char **array);
 int		is_map_line(char *line);
 void	add_map_line(char ***map_lines, char *line);
@@ -50,8 +98,16 @@ int		parse_texture(t_map *map, char *line);
 int		parse_rgb(t_map *map, char *line);
 void	finalize_map(t_map *map, char **map_lines);
 
+void	start_game(t_map *map);
+void	draw_frame(t_game *game);
+void	perform_dda(t_game *game);
+void	calculate_draw_bound(t_game *game);
+void	draw_column(t_game *game, int x, int drawStart, int drawEnd);
+
+void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);
 void	free_arr(char ***arr);
+int		close_window(t_game *game);
 
 void 	print_map(const t_map *map); //deletar depois
 

@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:11:02 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/17 12:23:48 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/20 08:54:10 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int	parse_rgb(t_map *map, char *line)
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
 		if (!extract_rgb(line + 2, map->color_floor))
-			exit_with_error("Invalid floor RGB format", map, NULL);
+			exit_with_error("Invalid floor RGB format", map, NULL, NULL);
 		return (1);
 	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (!extract_rgb(line + 2, map->color_ceiling))
-			exit_with_error("Invalid ceiling RGB format", map, NULL);
+			exit_with_error("Invalid ceiling RGB format", map, NULL, NULL);
 		return (1);
 	}
 	return (0);

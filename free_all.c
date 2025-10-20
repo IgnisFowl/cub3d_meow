@@ -6,11 +6,31 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:30:35 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/17 12:26:30 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:08:32 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	close_window(t_game *game)
+{
+	if (!game)
+		return (0);
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	if (game->map)
+		free_map(game->map);
+	ft_printf("Game closed cleanly\n");
+	exit(0);
+	return (0);
+}
 
 void	free_arr(char ***arr)
 {

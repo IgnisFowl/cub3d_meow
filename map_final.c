@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/17 12:40:52 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/20 08:54:23 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static void	copy_map_lines(t_map *map, char **map_lines)
 
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->map)
-		exit_with_error("Map alloc failed", map, NULL);
+		exit_with_error("Map alloc failed", map, NULL, NULL);
 	y = 0;
 	while (y < map->height)
 	{
 		map->map[y] = ft_strdup(map_lines[y]);
 		if (!map->map[y])
-			exit_with_error("Line strdup failed", map, NULL);
+			exit_with_error("Line strdup failed", map, NULL, NULL);
 		y++;
 	}
 	map->map[y] = NULL;

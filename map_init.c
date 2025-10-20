@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/17 12:50:16 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:57:48 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	process_map_line(char *trimmed, t_map *map, int *map_started, char *
 		add_map_line(map_lines, trimmed);
 	}
 	else
-		exit_with_error("Invalid line", map, trimmed);
+		exit_with_error("Invalid line", map, NULL, trimmed);
 }
 
 static void	handle_line(char *line, t_map *map, int *map_started, char ***map_lines)
@@ -71,20 +71,17 @@ static void	parse_loop(int fd, t_map *map)
 	free_arr(&map_lines);
 }
 
-void start_map(char *argv)
+void start_map(char *argv, t_map *map)
 {
 	int		fd;
-    t_map   map;
 
-	map_init(&map);
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		exit_with_error("Failed to open map.", &map, NULL);
+		exit_with_error("Failed to open map.", map, NULL, NULL);
 	else
 	{
-		parse_loop(fd, &map);
+		parse_loop(fd, map);
 		close(fd);
 	}
-	print_map(&map);
-	free_map(&map);
+	//print_map(map); //for debugging
 }

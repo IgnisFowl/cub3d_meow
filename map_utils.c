@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/17 12:46:51 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/20 08:54:03 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	add_map_line(char ***map_lines, char *line)
 	len = array_len(*map_lines);
 	new_array = malloc(sizeof(char *) * (len + 2));
 	if (!new_array)
-		exit_with_error("Mem alloc failed", NULL, line);
+		exit_with_error("Mem alloc failed", NULL, NULL, line);
 	while (i < len)
 	{
 		new_array[i] = (*map_lines)[i];
