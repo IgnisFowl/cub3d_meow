@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 09:49:55 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:38:42 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "libft/include/libft.h"
 # include "minilibx-linux/mlx.h"
 
-#define WIN_W 1280
-#define WIN_H 720
+# define WIN_W 1280
+# define WIN_H 720
 
 typedef struct s_map
 {
@@ -41,27 +41,27 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
-} t_map;
+}	t_map;
 
-typedef struct	s_raycast
+typedef struct s_raycast
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+	int		stepx;
+	int		stepy;
 	int		hit;
 	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
 }	t_raycast;
 
 typedef struct s_game
@@ -85,20 +85,20 @@ typedef struct s_game
 
 typedef struct s_vec
 {
-    double x;
-    double y;
-}   t_vec;
+	double	x;
+	double	y;
+}	t_vec;
 
-void 	map_init(t_map *map);
-void 	start_map(char *argv, t_map *map);
-int 	array_len(char **array);
+void	map_init(t_map *map);
+void	start_map(char *argv, t_map *map);
+int		array_len(char **array);
 int		is_map_line(char *line);
 void	add_map_line(char ***map_lines, char *line);
 int		parse_texture(t_map *map, char *line);
 int		parse_rgb(t_map *map, char *line);
 void	finalize_map(t_map *map, char **map_lines);
 
-void	start_game(t_map *map);
+void	start_game(t_map *map, t_game *game);
 void	draw_frame(t_game *game);
 void	perform_dda(t_game *game);
 void	calculate_draw_bound(t_game *game);
@@ -109,6 +109,6 @@ void	free_map(t_map *map);
 void	free_arr(char ***arr);
 int		close_window(t_game *game);
 
-void 	print_map(const t_map *map); //deletar depois
+void	print_map(const t_map *map); //deletar depois
 
 #endif

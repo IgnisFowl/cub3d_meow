@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:10:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 08:52:53 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:50:53 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,22 @@ void	exit_with_error(char *msg, t_map *map, t_game *game, char *str)
 int	main(int argc, char **argv)
 {
 	t_map	map;
+	t_game	*game;
 
 	if (argc < 2)
 	{
-		ft_printf("Usage: ./cub3d map.cub/n");
+		ft_printf("Usage: ./cub3d map.cub\n");
 		return (0);
 	}
 	if (argc == 2)
 	{
 		map_init(&map);
 		start_map(argv[1], &map);
-		start_game(&map);
+		game = malloc(sizeof(t_game));
+		if (!game)
+			exit_with_error("Failed to alloc game struct", &map, NULL, NULL);
+		start_game(&map, game);
 	}
 	ft_printf("nice\n");
-	free_map(&map);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:30:35 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 09:08:32 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:51:20 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	close_window(t_game *game)
 	}
 	if (game->map)
 		free_map(game->map);
+	free(game);
 	ft_printf("Game closed cleanly\n");
 	exit(0);
 	return (0);
@@ -34,7 +35,7 @@ int	close_window(t_game *game)
 
 void	free_arr(char ***arr)
 {
-	int i;
+	int	i;
 
 	if (!arr || !*arr)
 		return ;

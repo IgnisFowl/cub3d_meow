@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 10:00:13 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:46:44 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,25 @@ static void	init_player(t_game *game)
 		set_dir_and_plane(game, (t_vec){-1.0, 0.0}, (t_vec){0.0, -0.66});
 }
 
-void	start_game(t_map *map)
+void	start_game(t_map *map, t_game *game)
 {
-	t_game	game;
-
-	game_init(&game, map);
-	game.mlx = mlx_init();
-	if (!game.mlx)
-		exit_with_error("Failed to init MLX", map, &game, NULL);
-	game.win = mlx_new_window(game.mlx, WIN_W, WIN_H, "cub3d_meow");
-	if (!game.win)
-		exit_with_error("Failed to create window", map, &game, NULL);
-	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
-	if (!game.img)
-		exit_with_error("Failed to create image", map, &game, NULL);
-	game.addr = mlx_get_data_addr(game.img, &game.bpp, &game.line_len, &game.endian);
-	if (!game.addr)
-		exit_with_error("Failed to get data address", map, &game, NULL);
-	init_player(&game);
-	draw_frame(&game);
-	mlx_hook(game.win, 17, 0, close_window, &game);
-	mlx_key_hook(game.win, handle_key, &game);
-	mlx_loop(game.mlx);
+	game_init(game, map);
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit_with_error("Failed to init MLX", map, game, NULL);
+	game->win = mlx_new_window(game->mlx, WIN_W, WIN_H, "cub3d_meow");
+	if (!game->win)
+		exit_with_error("Failed to create window", map, game, NULL);
+	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
+	if (!game->img)
+		exit_with_error("Failed to create image", map, game, NULL);
+	game->addr = mlx_get_data_addr(game->img, &game->bpp, \
+		&game->line_len, &game->endian);
+	if (!game->addr)
+		exit_with_error("Failed to get data address", map, game, NULL);
+	init_player(game);
+	draw_frame(game);
+	mlx_hook(game->win, 17, 0, close_window, game);
+	mlx_key_hook(game->win, handle_key, game);
+	mlx_loop(game->mlx);
 }
