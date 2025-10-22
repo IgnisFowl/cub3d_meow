@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 18:46:44 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 20:57:38 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ static void	game_init(t_game *game, t_map *map)
 	game->dir_y = 0;
 	game->plane_x = 0;
 	game->plane_y = 0;
-}
-
-static int	handle_key(int keycode, void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	if (keycode == 65307)
-		close_window(game);
-	return (0);
+	game->key_w = 0;
+	game->key_s = 0;
+	game->key_a = 0;
+	game->key_d = 0;
+	game->key_left = 0;
+	game->key_right = 0;
 }
 
 static void	set_dir_and_plane(t_game *game, t_vec dir, t_vec plane)
@@ -82,6 +78,8 @@ void	start_game(t_map *map, t_game *game)
 	init_player(game);
 	draw_frame(game);
 	mlx_hook(game->win, 17, 0, close_window, game);
-	mlx_key_hook(game->win, handle_key, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 }

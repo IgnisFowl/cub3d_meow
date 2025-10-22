@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:43:45 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 18:43:43 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 21:03:29 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	dda_step_x(t_game *game)
 	game->raycast.sidedistx += game->raycast.deltadistx;
 	game->raycast.mapx += game->raycast.stepx;
 	game->raycast.side = 0;
-	if (game->raycast.mapx < 0 || game->raycast.mapx >= game->map->width || \
-		game->raycast.mapy < 0 || game->raycast.mapy >= game->map->height)
+	if (!is_inside_map(game->map, game->raycast.mapx, game->raycast.mapy))
 	{
 		game->raycast.hit = 1;
 		return ;
@@ -32,8 +31,7 @@ static void	dda_step_y(t_game *game)
 	game->raycast.sidedisty += game->raycast.deltadisty;
 	game->raycast.mapy += game->raycast.stepy;
 	game->raycast.side = 1;
-	if (game->raycast.mapx < 0 || game->raycast.mapx >= game->map->width || \
-		game->raycast.mapy < 0 || game->raycast.mapy >= game->map->height)
+	if (!is_inside_map(game->map, game->raycast.mapx, game->raycast.mapy))
 	{
 		game->raycast.hit = 1;
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 09:57:48 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:01:45 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ static int	process_config_line(char *trimmed, t_map *map)
 	return (0);
 }
 
-static void	process_map_line(char *trimmed, t_map *map, int *map_started, char ***map_lines)
+static void	process_map_line(char *trimmed, \
+	t_map *map, int *map_started, char ***map_lines)
 {
 	if (is_map_line(trimmed))
 	{
-		if(!*map_started)
+		if (!*map_started)
 			*map_started = 1;
 		add_map_line(map_lines, trimmed);
 	}
@@ -33,7 +34,8 @@ static void	process_map_line(char *trimmed, t_map *map, int *map_started, char *
 		exit_with_error("Invalid line", map, NULL, trimmed);
 }
 
-static void	handle_line(char *line, t_map *map, int *map_started, char ***map_lines)
+static void	handle_line(char *line, t_map *map, \
+	int *map_started, char ***map_lines)
 {
 	char	*trimmed;
 
@@ -62,16 +64,18 @@ static void	parse_loop(int fd, t_map *map)
 
 	map_started = 0;
 	map_lines = NULL;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		handle_line(line, map, &map_started, &map_lines);
 		free(line);
+		line = get_next_line(fd);
 	}
 	finalize_map(map, map_lines);
 	free_arr(&map_lines);
 }
 
-void start_map(char *argv, t_map *map)
+void	start_map(char *argv, t_map *map)
 {
 	int		fd;
 

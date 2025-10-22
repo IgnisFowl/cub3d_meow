@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 08:54:03 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:05:04 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	is_map_line(char *line)
 	return (1);
 }
 
-void map_init(t_map *map)
+void	map_init(t_map *map)
 {
 	map->texture_north = NULL;
 	map->texture_south = NULL;
@@ -116,4 +116,16 @@ void	add_map_line(char ***map_lines, char *line)
 	if (*map_lines)
 		free(*map_lines);
 	*map_lines = new_array;
+}
+
+int	is_inside_map(t_map *map, int x, int y)
+{
+	int	row_len;
+
+	if (y < 0 || y >= map->height)
+		return (0);
+	row_len = ft_strlen(map->map[y]);
+	if (x < 0 || x >= row_len)
+		return (0);
+	return (1);
 }

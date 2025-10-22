@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -I./include
 LDFLAGS = -Lminilibx-linux -lmlx_Linux -L/usr/lib -lmlx -lX11 -lXext
 
-SRC = main.c map_parser.c map_init.c map_final.c free_all.c map_utils.c game_init.c game_frame.c game_dda.c game_rgb.c
+SRC = main.c map_parser.c map_init.c map_final.c free_all.c map_utils.c game_init.c game_frame.c game_dda.c game_rgb.c game_move.c game_keys.c
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_final.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 08:54:23 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:59:32 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	copy_map_lines(t_map *map, char **map_lines)
 	}
 	map->map[y] = NULL;
 }
-	
+
 static void	find_player_start(t_map *map)
 {
 	int	y;

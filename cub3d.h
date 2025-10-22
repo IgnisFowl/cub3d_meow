@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 18:38:42 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 21:02:42 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
 
 # include "libft/include/ft_printf.h"
 # include "libft/include/get_next_line.h"
@@ -81,6 +82,12 @@ typedef struct s_game
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	int			key_w;
+	int			key_s;
+	int			key_a;
+	int			key_d;
+	int			key_left;
+	int			key_right;
 }	t_game;
 
 typedef struct s_vec
@@ -93,6 +100,7 @@ void	map_init(t_map *map);
 void	start_map(char *argv, t_map *map);
 int		array_len(char **array);
 int		is_map_line(char *line);
+int		is_inside_map(t_map *map, int x, int y);
 void	add_map_line(char ***map_lines, char *line);
 int		parse_texture(t_map *map, char *line);
 int		parse_rgb(t_map *map, char *line);
@@ -103,6 +111,12 @@ void	draw_frame(t_game *game);
 void	perform_dda(t_game *game);
 void	calculate_draw_bound(t_game *game);
 void	draw_column(t_game *game, int x, int drawStart, int drawEnd);
+
+int		game_loop(t_game *game);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+void	strafe_left(t_game *game, double move_speed);
+void	strafe_right(t_game *game, double move_speed);
 
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);
