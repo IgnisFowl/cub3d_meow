@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:02:42 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 21:54:49 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 
 # define WIN_W 1280
 # define WIN_H 720
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_texture;
 
 typedef struct s_map
 {
@@ -63,6 +74,10 @@ typedef struct s_raycast
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
+	double	wall_x;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
 }	t_raycast;
 
 typedef struct s_game
@@ -88,6 +103,10 @@ typedef struct s_game
 	int			key_d;
 	int			key_left;
 	int			key_right;
+	t_texture	texture_north;
+	t_texture	texture_south;
+	t_texture	texture_west;
+	t_texture	texture_east;
 }	t_game;
 
 typedef struct s_vec
@@ -117,6 +136,13 @@ int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 void	strafe_left(t_game *game, double move_speed);
 void	strafe_right(t_game *game, double move_speed);
+
+void	init_player(t_game *game);
+void	game_init(t_game *game, t_map *map);
+void	prepare_texture_params(t_game *game);
+int		rgb_to_int(int rgb[3]);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void	load_all_textures(t_game *game, t_map *map);
 
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:28:04 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 18:41:15 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 21:48:53 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,15 @@ void	draw_frame(t_game *game)
 	{
 		init_raycast(game, x);
 		perform_dda(game);
+		if (game->raycast.side == 0)
+			game->raycast.wall_x = game->pos_y + \
+			game->raycast.perpwalldist * game->raycast.raydiry;
+		else
+			game->raycast.wall_x = game->pos_x + \
+			game->raycast.perpwalldist * game->raycast.raydirx;
+		game->raycast.wall_x -= floor(game->raycast.wall_x);
 		calculate_draw_bound(game);
+		prepare_texture_params(game);
 		draw_column(game, x, game->raycast.drawstart, game->raycast.drawend);
 		x++;
 	}
