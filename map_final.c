@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 20:59:32 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 22:40:39 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	finalize_map(t_map *map, char **map_lines)
 	count_map_dimensions(map, map_lines);
 	copy_map_lines(map, map_lines);
 	find_player_start(map);
+	normalize_map(map);
 }

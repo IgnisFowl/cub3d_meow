@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:54:49 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/21 22:40:20 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	add_map_line(char ***map_lines, char *line);
 int		parse_texture(t_map *map, char *line);
 int		parse_rgb(t_map *map, char *line);
 void	finalize_map(t_map *map, char **map_lines);
+void	normalize_map(t_map *map);
 
 void	start_game(t_map *map, t_game *game);
 void	draw_frame(t_game *game);

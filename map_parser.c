@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:11:02 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/20 08:54:10 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/10/21 22:35:21 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_texture(t_map *map, char *line)
 
 static int	is_valid_rgb(int c)
 {
-	return(c >= 0 && c <= 255);
+	return (c >= 0 && c <= 255);
 }
 
 static int	extract_rgb(char *line, int *rgb)
