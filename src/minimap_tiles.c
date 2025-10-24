@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:25:08 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/24 16:54:50 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 18:34:38 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static int	minimap_visible_tile(t_game *g, int x, int y)
 
 	if (!g || !g->imgt)
 		return (0);
+	g->map->player_x = g->pos_x;
+	g->map->player_y = g->pos_y;
 	dx = x - g->map->player_x;
 	dy = y - g->map->player_y;
 	r2 = LIGHT_RADIUS * LIGHT_RADIUS;
