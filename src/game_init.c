@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:50:48 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 17:05:14 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,15 @@ int	rgb_to_int(int rgb[3])
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
 	char	*dst;
+	int		bpp_bytes;
 
+	if (!game || !game->addr)
+		return ;
 	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
 		return ;
-	dst = game->addr + (y * game->line_len + x * (game->bpp / 8));
-	*(unsigned int *)dst = color;
+	bpp_bytes = game->bpp / 8;
+	if (bpp_bytes <= 0)
+		return ;
+	dst = game->addr + (y * game->line_len + x * bpp_bytes);
+	*(unsigned int *)dst = (unsigned int)color;
 }

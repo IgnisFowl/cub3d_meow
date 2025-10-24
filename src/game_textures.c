@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:21:37 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/21 21:54:41 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 17:05:39 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static int	load_texture(t_game *game, t_texture *texture, char *path)
 {
+	if (!game || !game->mlx || !texture || !path)
+		return (0);
 	texture->img = mlx_xpm_file_to_image(game->mlx, \
 		path, &(texture->width), &(texture->height));
-	if (!texture->img)
+	if (!texture->img || texture->width <= 0 || texture->height <= 0)
 		return (0);
 	texture->addr = mlx_get_data_addr(texture->img, \
 		&texture->bpp, &texture->line_len, &texture->endian);
@@ -27,6 +29,8 @@ static int	load_texture(t_game *game, t_texture *texture, char *path)
 
 void	load_all_textures(t_game *game, t_map *map)
 {
+	if (!game || !game->mlx || !map)
+		exit_with_error("Failed to load_all_textures", map, game, NULL);
 	if (!load_texture(game, &game->texture_north, map->texture_north))
 		exit_with_error("Failed to load north texture", map, game, NULL);
 	if (!load_texture(game, &game->texture_south, map->texture_south))

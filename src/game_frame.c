@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:28:04 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:48:53 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 16:52:36 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ void	draw_frame(t_game *game)
 		draw_column(game, x, game->raycast.drawstart, game->raycast.drawend);
 		x++;
 	}
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	minimap_present(game, 16, 16);
 }

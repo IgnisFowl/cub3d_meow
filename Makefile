@@ -23,6 +23,9 @@ SRC_FILES = \
 	map_normalizer.c \
 	map_parser.c \
 	map_utils.c \
+	minimap_draw.c \
+	minimap_tiles.c \
+	minimap_utils.c
 
 # Prepend SRCDIR/ to each file
 SRC = $(addprefix $(SRCDIR)/,$(SRC_FILES))

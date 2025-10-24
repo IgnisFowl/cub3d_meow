@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 11:19:08 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 18:27:00 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,43 @@ static int	process_config_line(char *trimmed, t_map *map)
 		return (1);
 	return (0);
 }
-/*
-static void	process_map_line(char *trimmed, \
-	t_map *map, int *map_started, char ***map_lines)
+
+static void	line_aux(char *line, char ***map_lines, \
+	t_map *map, int *map_started)
 {
-	if (is_map_line(trimmed))
+	if (is_map_line(line))
 	{
-		if (!*map_started)
-			*map_started = 1;
-		add_map_line(map_lines, trimmed);
+		*map_started = 1;
+		add_map_line(map_lines, ft_strdup(line));
+		return ;
 	}
 	else
-		exit_with_error("Invalid line", map, NULL, trimmed);
-}*/
+		exit_with_error("Invalid line", map, NULL, line);
+}
 
 static void	handle_line(char *line, t_map *map, \
 	int *map_started, char ***map_lines)
 {
-    char *trimmed;
+	char	*trimmed;
 
-    if (!*map_started)
-    {
-        trimmed = ft_strtrim(line, " \t\n");
-        if (!trimmed || !*trimmed)
-        {
-            free(trimmed);
-            return;
-        }
-        if (!process_config_line(trimmed, map))
-        {
-            if (is_map_line(line))
-            {
-                *map_started = 1;
-                add_map_line(map_lines, ft_strdup(line)); // keep spaces
-            }
-            else
-                exit_with_error("Invalid line", map, NULL, line);
-        }
-        free(trimmed);
-    }
-    else
-    {
-        if (line[0] == '\n')
-            return; // ignore empty lines after map starts (optional)
-        add_map_line(map_lines, ft_strdup(line)); // no trimming—preserve layout
-    }
+	if (!*map_started)
+	{
+		trimmed = ft_strtrim(line, " \t\n");
+		if (!trimmed || !*trimmed)
+		{
+			free(trimmed);
+			return ;
+		}
+		if (!process_config_line(trimmed, map))
+			line_aux(line, map_lines, map, map_started);
+		free(trimmed);
+	}
+	else
+	{
+		if (line[0] == '\n')
+			return ;
+		add_map_line(map_lines, ft_strdup(line));
+	}
 }
 
 static void	parse_loop(int fd, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:30:35 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:57:57 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 18:16:21 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ void	free_textures(t_game *game)
 		mlx_destroy_image(game->mlx, game->texture_east.img);
 }
 
+void	free_imgt(t_game *game)
+{
+	if (game->imgt)
+	{
+		if (game->imgt->img && game->mlx)
+			mlx_destroy_image(game->mlx, game->imgt->img);
+		free(game->imgt);
+		game->imgt = NULL;
+	}
+}
+
 int	close_window(t_game *game)
 {
 	if (!game)
@@ -76,6 +87,8 @@ int	close_window(t_game *game)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
+	if (game->imgt)
+		free_imgt(game);
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);

@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:52:12 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:48:03 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 17:07:37 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,14 @@ static void	draw_floor(t_game *game, int x, int drawEnd)
 
 void	draw_column(t_game *game, int x, int drawStart, int drawEnd)
 {
+	if (!game || !game->addr)
+		return ;
+	if (drawStart < 0)
+		drawStart = 0;
+	if (drawEnd >= WIN_H)
+		drawEnd = WIN_H - 1;
 	if (drawStart > drawEnd)
 		return ;
-
 	draw_ceiling(game, x, drawStart);
 	draw_wall_slice(game, x, drawStart, drawEnd);
 	draw_floor(game, x, drawEnd);

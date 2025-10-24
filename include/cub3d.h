@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 16:29:27 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 16:54:08 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 
 # define WIN_W 1280
 # define WIN_H 720
+# define COLOR_WALL 0x333333
+# define COLOR_FLOOR 0x101010
+# define COLOR_VISIBLE 0xFFFFFF
+# define COLOR_PLAYER 0x00FF00
+# define COLOR_DARK 0x000000
+# define TILE_SIZE 8
+# define LIGHT_RADIUS 5 
 
 typedef struct s_texture
 {
@@ -38,6 +45,17 @@ typedef struct s_texture
 	int		line_len;
 	int		endian;
 }	t_texture;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		w;
+	int		h;
+}	t_img;
 
 typedef struct s_map
 {
@@ -84,6 +102,7 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_raycast	raycast;
+	t_img		*imgt;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -144,6 +163,14 @@ void	prepare_texture_params(t_game *game);
 int		rgb_to_int(int rgb[3]);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	load_all_textures(t_game *game, t_map *map);
+
+void	minimap_present(t_game *g, int sx, int sy);
+void	draw_minimap(t_game *g);
+void	minimap_put_px(t_game *g, int x, int y, int color);
+int		c_str_len(const char *s);
+int		minimap_init(t_game *g);
+void	minimap_draw_tile(t_game *g, int tx, int ty, int color);
+int		minimap_tile_color(t_game *g, int x, int y);
 
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);
