@@ -1,17 +1,40 @@
-NAME = cub3d
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -I./include
+NAME    = cub3d
+CC      = gcc
+CFLAGS  = -Wall -Wextra -Werror -I./include -I./libft/include -Iminilibx-linux
 LDFLAGS = -Lminilibx-linux -lmlx_Linux -L/usr/lib -lmlx -lX11 -lXext
 
-SRC = main.c map_parser.c map_init.c map_final.c free_all.c map_utils.c map_normalizer.c game_init.c game_frame.c game_dda.c game_draw.c game_move.c game_keys.c game_textures.c game_start.c
-OBJ_DIR = obj
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+SRCDIR  = src
+OBJDIR  = obj
+
+# List sources RELATIVE to SRCDIR (no wildcards)
+SRC_FILES = \
+	free_all.c \
+	game_dda.c \
+	game_draw.c \
+	game_frame.c \
+	game_init.c \
+	game_keys.c \
+	game_move.c \
+	game_start.c \
+	game_textures.c \
+	main.c \
+	map_final.c \
+	map_init.c \
+	map_normalizer.c \
+	map_parser.c \
+	map_utils.c \
+
+# Prepend SRCDIR/ to each file
+SRC = $(addprefix $(SRCDIR)/,$(SRC_FILES))
+
+# Map src/foo.c -> obj/foo.o (preserves any subfolders present)
+OBJ = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
 
 LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT     = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = ./minilibx-linux
-MLX = $(MLX_DIR)/libmlx_Linux.a
+MLX     = $(MLX_DIR)/libmlx_Linux.a
 
 all: $(LIBFT) $(MLX) $(NAME)
 
@@ -21,19 +44,16 @@ $(LIBFT):
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-# Compile object files and ensure obj directory exists
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+# Ensure obj subdirs exist per source's path
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -O3 -c $< -o $@
 
-# Build the main executable
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJDIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean || true
 

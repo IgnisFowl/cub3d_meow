@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 22:40:20 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 16:29:27 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <fcntl.h>
 # include <X11/keysym.h>
 
-# include "libft/include/ft_printf.h"
-# include "libft/include/get_next_line.h"
-# include "libft/include/libft.h"
-# include "minilibx-linux/mlx.h"
+# include "../libft/include/ft_printf.h"
+# include "../libft/include/get_next_line.h"
+# include "../libft/include/libft.h"
+# include "../minilibx-linux/mlx.h"
 
 # define WIN_W 1280
 # define WIN_H 720
