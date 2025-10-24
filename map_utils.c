@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:05:04 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 11:40:44 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,22 @@
 
 void print_map(const t_map *map)
 {
-    printf("Textures:\n");
-    printf("  North: %s\n", map->texture_north ? map->texture_north : "NULL");
-    printf("  South: %s\n", map->texture_south ? map->texture_south : "NULL");
-    printf("  West:  %s\n", map->texture_west  ? map->texture_west  : "NULL");
-    printf("  East:  %s\n", map->texture_east  ? map->texture_east  : "NULL");
-    
-    printf("Colors:\n");
-    printf("  Floor: R=%d G=%d B=%d\n",
-           map->color_floor[0], map->color_floor[1], map->color_floor[2]);
-    printf("  Ceiling: R=%d G=%d B=%d\n",
-           map->color_ceiling[0], map->color_ceiling[1], map->color_ceiling[2]);
-    
-    printf("Map size: %d x %d\n", map->width, map->height);
-    
-    printf("Player position: (%d, %d) direction: %c\n",
-           map->player_x, map->player_y, map->player_dir);
-    
-    printf("Map data:\n");
-    if (map->map)
+    if (!map || !map->map)
     {
-        for (int y = 0; y < map->height; y++)
-            printf("  %s\n", map->map[y]);
+        printf("Map is empty or not initialized.\n");
+        return;
     }
-    else
+
+    printf("Map dimensions: %d x %d\n", map->width, map->height);
+    printf("Map data:\n");
+
+    for (int y = 0; y < map->height; y++)
     {
-        printf("  NULL\n");
+        printf("[%2d]: ", y);              // print line number padded to 2 digits
+        if (map->map[y])
+            printf("%.*s\n", map->width, map->map[y]); // print exactly map->width chars
+        else
+            printf("(null)\n");
     }
 }
 
@@ -68,7 +58,7 @@ int	is_map_line(char *line)
 		if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W'
-			&& line[i] != ' ')
+			&& line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 			return (0);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:53:40 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/10/24 11:19:08 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	process_config_line(char *trimmed, t_map *map)
 		return (1);
 	return (0);
 }
-
+/*
 static void	process_map_line(char *trimmed, \
 	t_map *map, int *map_started, char ***map_lines)
 {
@@ -32,28 +32,39 @@ static void	process_map_line(char *trimmed, \
 	}
 	else
 		exit_with_error("Invalid line", map, NULL, trimmed);
-}
+}*/
 
 static void	handle_line(char *line, t_map *map, \
 	int *map_started, char ***map_lines)
 {
-	char	*trimmed;
+    char *trimmed;
 
-	trimmed = ft_strtrim(line, " \t\n");
-	if (!trimmed || !*trimmed)
-	{
-		free(trimmed);
-		return ;
-	}
-	if (!*map_started)
-	{
-		if (!process_config_line(trimmed, map))
-			process_map_line(trimmed, map, map_started, map_lines);
-		else
-			free(trimmed);
-	}
-	else
-		process_map_line(trimmed, map, map_started, map_lines);
+    if (!*map_started)
+    {
+        trimmed = ft_strtrim(line, " \t\n");
+        if (!trimmed || !*trimmed)
+        {
+            free(trimmed);
+            return;
+        }
+        if (!process_config_line(trimmed, map))
+        {
+            if (is_map_line(line))
+            {
+                *map_started = 1;
+                add_map_line(map_lines, ft_strdup(line)); // keep spaces
+            }
+            else
+                exit_with_error("Invalid line", map, NULL, line);
+        }
+        free(trimmed);
+    }
+    else
+    {
+        if (line[0] == '\n')
+            return; // ignore empty lines after map starts (optional)
+        add_map_line(map_lines, ft_strdup(line)); // no trimming—preserve layout
+    }
 }
 
 static void	parse_loop(int fd, t_map *map)
@@ -87,5 +98,5 @@ void	start_map(char *argv, t_map *map)
 		parse_loop(fd, map);
 		close(fd);
 	}
-	//print_map(map); //for debugging
+	print_map(map); //for debugging
 }
