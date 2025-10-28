@@ -24,6 +24,8 @@ SRC_FILES = \
 	map_parser.c \
 	map_utils.c \
 	minimap_draw.c \
+	minimap_fov_utils.c \
+	minimap_fov.c \
 	minimap_tiles.c \
 	minimap_utils.c
 

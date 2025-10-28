@@ -30,10 +30,34 @@
 # define COLOR_WALL 0x333333
 # define COLOR_FLOOR 0x101010
 # define COLOR_VISIBLE 0xFFFFFF
-# define COLOR_PLAYER 0x00FF00
+# define COLOR_PLAYER 0x00FF1493
 # define COLOR_DARK 0x000000
+# define COLOR_FOV_TRIANGLE 0x00FFB6C1 
 # define TILE_SIZE 8
 # define LIGHT_RADIUS 5 
+
+typedef struct s_fov
+{
+	int player_px;
+	int player_py;
+	int end_left_x;
+	int end_left_y;
+	int end_right_x;
+	int end_right_y;
+}	t_fov;
+
+typedef struct s_triangle
+{
+	int x0, y0;
+	int x1, y1;
+	int x2, y2;
+}	t_triangle;
+
+typedef struct s_tri_bounds
+{
+	int min_x, max_x;
+	int min_y, max_y;
+}	t_tri_bounds;
 
 typedef struct s_texture
 {
@@ -171,6 +195,12 @@ int		c_str_len(const char *s);
 int		minimap_init(t_game *g);
 void	minimap_draw_tile(t_game *g, int tx, int ty, int color);
 int		minimap_tile_color(t_game *g, int x, int y);
+void	init_fov_pos(t_game *g, t_fov *f);
+void	calc_fov_edges(t_game *g, t_fov *f);
+void 	fov_to_triangle(t_fov *f, t_triangle *t);
+void 	tri_bounds(t_triangle *t, t_tri_bounds *b);
+int 	point_in_tri(t_triangle *t, int x, int y);
+void	draw_minimap_fov(t_game *g);
 
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);

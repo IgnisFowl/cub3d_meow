@@ -77,6 +77,7 @@ void	draw_minimap(t_game *g)
 	}
 	g->map->player_x = (int)g->pos_x;
     g->map->player_y = (int)g->pos_y;
+	draw_minimap_fov(g);
 	if (g->map->player_x >= 0 && g->map->player_x < g->map->width
 		&& g->map->player_y >= 0 && g->map->player_y < g->map->height)
 		minimap_draw_tile(g, g->map->player_x, g->map->player_y, COLOR_PLAYER);
