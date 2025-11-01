@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 12:22:33 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:14:05 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,44 @@ typedef struct s_img
 	int		h;
 }	t_img;
 
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+	int		type;
+	int		active;
+	int		frame;
+	double	dist;
+}   t_sprite;
+
+typedef struct s_spr_calc
+{
+	double	spr_x;
+	double	spr_y;
+	double	inv_det;
+	double	trans_x;
+	double	trans_y;
+	int		screen_x;
+	int		height;
+	int		width;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		draw_start_x;
+	int		draw_end_x;
+}	t_spr_calc;
+
+typedef struct s_cats
+{
+	t_sprite	*cats;
+	t_sprite	*snacks;
+	int			num_cats;
+	int			num_snacks;
+	int			snacks_inv;
+	double		anim_time;
+	t_texture	cat_textures[3][3];
+	t_texture	snack_texture;
+}   t_cats;
+
 typedef struct s_map
 {
 	char	*texture_north;
@@ -122,6 +160,12 @@ typedef struct s_raycast
 	double	tex_pos;
 }	t_raycast;
 
+typedef struct s_vec
+{
+	double	x;
+	double	y;
+}	t_vec;
+
 typedef struct s_game
 {
 	t_map		*map;
@@ -151,15 +195,11 @@ typedef struct s_game
 	t_texture	texture_west;
 	t_texture	texture_east;
 	int			mouse_x;
-	int			prev_mouse_x;
-	int			first_mouse;
+	int			mouse_last_x;
+	int			*z_buffer;
+	float   mouse_sensitivity;
+	t_cats		cats;
 }	t_game;
-
-typedef struct s_vec
-{
-	double	x;
-	double	y;
-}	t_vec;
 
 void	map_init(t_map *map);
 void	start_map(char *argv, t_map *map);
@@ -190,6 +230,7 @@ void	prepare_texture_params(t_game *game);
 int		rgb_to_int(int rgb[3]);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	load_all_textures(t_game *game, t_map *map);
+void	raycast_struct_init(t_raycast *r);
 
 void	minimap_present(t_game *g, int sx, int sy);
 void	draw_minimap(t_game *g);
@@ -205,14 +246,35 @@ void 	tri_bounds(t_triangle *t, t_tri_bounds *b);
 int 	point_in_tri(t_triangle *t, int x, int y);
 void	draw_minimap_fov(t_game *g);
 
-void	handle_mouse(t_game *game);
-void	rotate_camera(t_game *game, double angle);
 int		mouse_move(int x, int y, t_game *game);
-void	apply_rotation(t_game *game, t_vec *old);
+int		focus_in(t_game *game);
+int		focus_out(t_game *game);
+
+void	clear_cats_from_map(t_game *game);
+void	parse_cats(t_game *game);
+void	init_cats(t_game *game);
+void	load_cats_textures(t_game *game);
+void	update_animations(t_game *game);
+void	check_snack_pickup(t_game *game);
+void	try_collect_cat(t_game *game);
+void	render_sprites(t_game *game);
+void	draw_one_sprite(t_game *g, t_sprite *s, t_texture *tex);
+void	put_sprite_pixel(t_game *g, int x, int y, int color);
+int		get_tex_pixel(t_texture *tex, int x, int y);
+void	calc_sprite_bounds(t_spr_calc *c);
+void	calc_sprite_screen(t_spr_calc *c);
+void	init_sprite_calc(t_game *g, t_sprite *s, t_spr_calc *c);
+void	update_all_distances(t_game *game);
+void	sort_all_sprites(t_game *game);
+void	draw_snack_icon(t_game *g);
+void	draw_snack_text(t_game *game);
+void	draw_hud_pixel(t_game *g, int x, int y, int color);
+int		get_snack_tex_pixel(t_game *g, int tex_x, int tex_y);
 
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);
 void	free_arr(char ***arr);
+void	free_cats(t_game *game);
 int		close_window(t_game *game);
 
 void	print_map(const t_map *map); //deletar depois

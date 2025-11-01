@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 11:40:44 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 12:59:17 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int	is_map_line(char *line)
 		if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W'
-			&& line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			&& line[i] != 'C' && line[i] != 'B'
+			&& line[i] != ' ' && line[i] != '\t' 
+			&& line[i] != '\n')
 			return (0);
 		i++;
 	}

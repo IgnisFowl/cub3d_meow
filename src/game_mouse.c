@@ -6,93 +6,64 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 12:15:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 12:34:16 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:23:15 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	apply_rotation(t_game *game, t_vec *old)
+static void	rotate_camera(t_game *game, double rot_amount)
 {
-	double	cos_a;
-	double	sin_a;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	cos_a = cos(old->x);
-	sin_a = sin(old->x);
-	old->y = game->dir_x;
-	game->dir_x = game->dir_x * cos_a - game->dir_y * sin_a;
-	game->dir_y = old->y * sin_a + game->dir_y * cos_a;
-	old->y = game->plane_x;
-	game->plane_x = game->plane_x * cos_a - game->plane_y * sin_a;
-	game->plane_y = old->y * sin_a + game->plane_y * cos_a;
+	old_dir_x = game->dir_x;
+	game->dir_x = game->dir_x * cos(rot_amount) - game->dir_y * sin(rot_amount);
+	game->dir_y = old_dir_x * sin(rot_amount) + game->dir_y * cos(rot_amount);
+	old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(rot_amount) - game->plane_y * sin(rot_amount);
+	game->plane_y = old_plane_x * sin(rot_amount) + game->plane_y * cos(rot_amount);
 }
 
-void    rotate_camera(t_game *game, double angle)
+static int	is_large_jump(int delta)
 {
-	t_vec	old;
-
-	old.x = angle;
-	apply_rotation(game, &old);
+	return (abs(delta) >= 50);
 }
-/*
-void    handle_mouse(t_game *game)
-{
-	int		mouse_y;
-	int		delta_x;
-	double	sensitivity;
 
-	mlx_mouse_get_pos(game->mlx, game->win, &game->mouse_x, &mouse_y);
-	if (game->first_mouse)
+static void	handle_normal_rotation(t_game *game, int delta_x)
+{
+	double	rot_amount;
+
+	if (delta_x != 0 && !is_large_jump(delta_x))
 	{
-		game->prev_mouse_x = game->mouse_x;
-		game->first_mouse = 0;
-		return ;
+		rot_amount = delta_x * game->mouse_sensitivity;
+		rotate_camera(game, rot_amount);
 	}
-	delta_x = game->mouse_x - game->prev_mouse_x;
-	sensitivity = 0.003;
-	rotate_camera(game, delta_x * sensitivity);
-	game->prev_mouse_x = game->mouse_x;
-}*/
-
-void    handle_mouse(t_game *game)
-{
-	int		mouse_y;
-	int		delta_x;
-	double	sensitivity;
-
-	mlx_mouse_get_pos(game->mlx, game->win, &game->mouse_x, &mouse_y);
-	if (game->first_mouse)
-	{
-		game->prev_mouse_x = game->mouse_x;
-		game->first_mouse = 0;
-		return ;
-	}
-	delta_x = game->mouse_x - game->prev_mouse_x;
-	sensitivity = 0.003;
-	rotate_camera(game, delta_x * sensitivity);
-	game->prev_mouse_x = game->mouse_x;
 }
 
-int     mouse_move(int x, int y, t_game *game)
+static void	handle_edge_rotation(t_game *game, int x)
 {
-	int		delta_x;
-	double	sensitivity;
+	int		edge_margin;
+	double	rot_amount;
+
+	edge_margin = 50;
+	if (x < edge_margin)
+		rot_amount = -0.02;
+	else if (x > WIN_W - edge_margin)
+		rot_amount = 0.02;
+	else
+		return ;
+	rotate_camera(game, rot_amount);
+}
+
+int	mouse_move(int x, int y, t_game *game)
+{
+	int delta_x;
 
 	(void)y;
-	if (game->first_mouse)
-	{
-		game->prev_mouse_x = x;
-		game->first_mouse = 0;
-		return (0);
-	}
-	delta_x = x - game->prev_mouse_x;
-	if (delta_x > 100 || delta_x < -100)
-	{
-		game->prev_mouse_x = x;
-		return (0);
-	}
-	sensitivity = 0.003;
-	rotate_camera(game, delta_x * sensitivity);
-	game->prev_mouse_x = x;
+	delta_x = x - game->mouse_last_x;
+	game->mouse_last_x = x;
+	handle_normal_rotation(game, delta_x);
+	handle_edge_rotation(game, x);
 	return (0);
 }

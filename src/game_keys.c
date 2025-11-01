@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:12:08 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/21 21:13:53 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 13:23:10 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	key_press(int keycode, t_game *game)
 		game->key_left = 1;
 	else if (keycode == XK_Right)
 		game->key_right = 1;
+	else if (keycode == 32)
+		try_collect_cat(game);
 	else if (keycode == XK_Escape)
 		close_window(game);
 	return (0);

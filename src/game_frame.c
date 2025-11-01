@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:28:04 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 16:52:36 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 15:33:03 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	raycast_struct_init(t_raycast *r)
-{
-	r->camerax = 0;
-	r->raydirx = 0;
-	r->raydiry = 0;
-	r->mapx = 0;
-	r->mapy = 0;
-	r->sidedistx = 0;
-	r->sidedisty = 0;
-	r->deltadistx = 0;
-	r->deltadisty = 0;
-	r->perpwalldist = 0;
-	r->stepx = 0;
-	r->stepy = 0;
-	r->hit = 0;
-	r->side = 0;
-	r->lineheight = 0;
-	r->drawstart = 0;
-	r->drawend = 0;
-}
 
 static void	init_raycast_dir_map(t_game *game, int x)
 {
@@ -85,6 +64,16 @@ static void	init_raycast(t_game *game, int x)
 	game->raycast.hit = 0;
 }
 
+static void	draw_frame_continue(t_game *game)
+{
+	render_sprites(game);
+	draw_minimap(game);
+	draw_snack_icon(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	minimap_present(game, 16, 16);
+	draw_snack_text(game);
+}
+
 void	draw_frame(t_game *game)
 {
 	int	x;
@@ -95,6 +84,8 @@ void	draw_frame(t_game *game)
 	{
 		init_raycast(game, x);
 		perform_dda(game);
+        if (x >= 0 && x < WIN_W)
+            game->z_buffer[x] = game->raycast.perpwalldist;
 		if (game->raycast.side == 0)
 			game->raycast.wall_x = game->pos_y + \
 			game->raycast.perpwalldist * game->raycast.raydiry;
@@ -107,7 +98,5 @@ void	draw_frame(t_game *game)
 		draw_column(game, x, game->raycast.drawstart, game->raycast.drawend);
 		x++;
 	}
-	draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	minimap_present(game, 16, 16);
+	draw_frame_continue(game);
 }

@@ -6,20 +6,31 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:27:32 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/01 12:20:14 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:15:52 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static void	init_mouse(t_game *game)
+{
+	game->mouse_sensitivity = 0.002f;
+	game->mouse_last_x = WIN_W / 2;
+	game->mouse_x = WIN_W / 2;
+}
+
 static void	mlx_starts(t_game *game)
 {
 	init_player(game);
+	init_mouse(game);
+	init_cats(game);
 	draw_frame(game);
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
 	mlx_hook(game->win, 6, 1L << 6, mouse_move, game);
+	mlx_hook(game->win, 9, 1L << 21, focus_in, game);
+	mlx_hook(game->win, 10, 1L << 21, focus_out, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 }

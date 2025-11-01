@@ -1,0 +1,31 @@
+# mlx.supp
+{
+   MLX_X11_writev
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   ...
+   fun:mlx_new_window
+}
+
+{
+   MLX_X11_uninit
+   Memcheck:Param
+   writev(vector[0])
+   ...
+   obj:*/libxcb.so.*
+}
+
+{
+   MLX_Init_Leaks
+   Memcheck:Leak
+   ...
+   fun:mlx_init
+}
+
+{
+   MLX_Display_Leaks
+   Memcheck:Leak
+   ...
+   fun:XOpenDisplay
+}

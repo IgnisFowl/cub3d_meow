@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_move.c                                        :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:03:03 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/21 21:15:34 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 15:34:20 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	game_loop(t_game *game)
 
 	move_speed = 0.05;
 	rot_speed = 0.03;
+	check_snack_pickup(game);
+	update_animations(game);
 	if (game->key_w)
 		move_forward(game, move_speed);
 	if (game->key_s)

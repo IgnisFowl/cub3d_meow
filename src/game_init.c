@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 12:15:47 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:32:33 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	game_init(t_game *game, t_map *map)
 	game->key_left = 0;
 	game->key_right = 0;
 	game->mouse_x = 0;
-	game->prev_mouse_x = 0;
-	game->first_mouse = 1;
+	game->mouse_last_x = 0;
+	game->z_buffer = malloc(sizeof(double) * WIN_W);
+	if (!game->z_buffer)
+		exit_with_error("Failed to allocate z_buffer", NULL, game, NULL);
 }
 
 static void	set_dir_and_plane(t_game *game, t_vec dir, t_vec plane)

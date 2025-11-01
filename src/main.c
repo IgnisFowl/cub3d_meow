@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:10:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:08:18 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 16:06:08 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exit_with_error(char *msg, t_map *map, t_game *game, char *str)
 
 int	main(int argc, char **argv)
 {
-	t_map	map;
+	t_map	*map;
 	t_game	*game;
 
 	if (argc < 2)
@@ -37,12 +37,16 @@ int	main(int argc, char **argv)
 	}
 	if (argc == 2)
 	{
-		map_init(&map);
-		start_map(argv[1], &map);
+		map = malloc(sizeof(t_map));
+		if (!map)
+			return (1);
+		map_init(map);
+		start_map(argv[1], map);
 		game = malloc(sizeof(t_game));
 		if (!game)
-			exit_with_error("Failed to alloc game struct", &map, NULL, NULL);
-		start_game(&map, game);
+			exit_with_error("Failed to alloc game struct", map, NULL, NULL);
+		ft_memset(game, 0, sizeof(t_game));
+		start_game(map, game);
 	}
 	ft_printf("nice\n");
 	return (0);

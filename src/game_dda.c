@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   game_dda.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:43:45 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 21:03:29 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 13:56:08 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	raycast_struct_init(t_raycast *r)
+{
+	r->camerax = 0;
+	r->raydirx = 0;
+	r->raydiry = 0;
+	r->mapx = 0;
+	r->mapy = 0;
+	r->sidedistx = 0;
+	r->sidedisty = 0;
+	r->deltadistx = 0;
+	r->deltadisty = 0;
+	r->perpwalldist = 0;
+	r->stepx = 0;
+	r->stepy = 0;
+	r->hit = 0;
+	r->side = 0;
+	r->lineheight = 0;
+	r->drawstart = 0;
+	r->drawend = 0;
+}
 
 static void	dda_step_x(t_game *game)
 {

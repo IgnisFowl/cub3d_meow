@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:30:35 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 18:16:21 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 16:08:48 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,19 @@ void	free_arr(char ***arr)
 
 void	free_map(t_map *map)
 {
+	if (!map)
+		return ;
 	if (map->texture_north)
-	{
 		free(map->texture_north);
-		map->texture_north = NULL;
-	}
 	if (map->texture_south)
-	{
 		free(map->texture_south);
-		map->texture_south = NULL;
-	}
 	if (map->texture_west)
-	{
 		free(map->texture_west);
-		map->texture_west = NULL;
-	}
 	if (map->texture_east)
-	{
 		free(map->texture_east);
-		map->texture_east = NULL;
-	}
 	if (map->map)
 		free_arr(&map->map);
+	free(map);
 }
 
 void	free_textures(t_game *game)
@@ -83,6 +74,14 @@ int	close_window(t_game *game)
 	if (!game)
 		return (0);
 	free_textures(game);
+	free_cats(game);
+	if (game->z_buffer)
+	{
+		free(game->z_buffer);
+		game->z_buffer = NULL;
+	}
+	if (game->map)
+		free_map(game->map);
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->win)
@@ -94,10 +93,7 @@ int	close_window(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
-	if (game->map)
-		free_map(game->map);
 	free(game);
-	ft_printf("Game closed cleanly\n");
 	exit(0);
 	return (0);
 }

@@ -8,14 +8,26 @@ OBJDIR  = obj
 
 # List sources RELATIVE to SRCDIR (no wildcards)
 SRC_FILES = \
+	cats_collision.c \
+	cats_hud_utils.c \
+	cats_hud.c \
+	cats_init.c \
+	cats_parse.c \
+	cats_render.c \
+	cats_render_utils.c \
+	cats_sprite_utils.c \
+	cats_sprite.c \
+	cats_textures.c \
 	free_all.c \
+	free_cats.c \
 	game_dda.c \
 	game_draw.c \
 	game_frame.c \
 	game_init.c \
 	game_keys.c \
+	game_loop.c \
+	game_mouse_utils.c \
 	game_mouse.c \
-	game_move.c \
 	game_start.c \
 	game_textures.c \
 	main.c \
