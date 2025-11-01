@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:27:32 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/24 18:21:21 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 12:20:14 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	mlx_starts(t_game *game)
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
+	mlx_hook(game->win, 6, 1L << 6, mouse_move, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 }

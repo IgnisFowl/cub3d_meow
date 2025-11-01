@@ -1,7 +1,7 @@
 NAME    = cub3d
 CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror -I./include -I./libft/include -Iminilibx-linux
-LDFLAGS = -Lminilibx-linux -lmlx_Linux -L/usr/lib -lmlx -lX11 -lXext
+LDFLAGS = -Lminilibx-linux -lmlx_Linux -L/usr/lib -lmlx -lX11 -lXext -lm
 
 SRCDIR  = src
 OBJDIR  = obj
@@ -14,6 +14,7 @@ SRC_FILES = \
 	game_frame.c \
 	game_init.c \
 	game_keys.c \
+	game_mouse.c \
 	game_move.c \
 	game_start.c \
 	game_textures.c \

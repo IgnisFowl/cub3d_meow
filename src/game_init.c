@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 17:05:14 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 12:15:47 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	game_init(t_game *game, t_map *map)
 	game->key_d = 0;
 	game->key_left = 0;
 	game->key_right = 0;
+	game->mouse_x = 0;
+	game->prev_mouse_x = 0;
+	game->first_mouse = 1;
 }
 
 static void	set_dir_and_plane(t_game *game, t_vec dir, t_vec plane)

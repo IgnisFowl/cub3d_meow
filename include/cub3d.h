@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 16:54:08 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/01 12:22:33 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ typedef struct s_game
 	t_texture	texture_south;
 	t_texture	texture_west;
 	t_texture	texture_east;
+	int			mouse_x;
+	int			prev_mouse_x;
+	int			first_mouse;
 }	t_game;
 
 typedef struct s_vec
@@ -201,6 +204,11 @@ void 	fov_to_triangle(t_fov *f, t_triangle *t);
 void 	tri_bounds(t_triangle *t, t_tri_bounds *b);
 int 	point_in_tri(t_triangle *t, int x, int y);
 void	draw_minimap_fov(t_game *g);
+
+void	handle_mouse(t_game *game);
+void	rotate_camera(t_game *game, double angle);
+int		mouse_move(int x, int y, t_game *game);
+void	apply_rotation(t_game *game, t_vec *old);
 
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void	free_map(t_map *map);
