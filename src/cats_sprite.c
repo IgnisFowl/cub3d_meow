@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:32:57 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 13:46:28 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:06:48 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,23 @@ static void	draw_sprite_stripe(t_game *g, t_spr_calc *c, t_texture *tex, int str
 	int	tex_y;
 	int	color;
 
-    if (stripe < 0 || stripe >= WIN_W)
+	if (stripe < 0 || stripe >= WIN_W || c->trans_y <= 0 || c->trans_y > g->z_buffer[stripe])
 		return ;
-	if (c->trans_y >= g->z_buffer[stripe])
-		return ;
-	tex_x = (int)((stripe - c->draw_start_x) * tex->width / c->width);
+	tex_x = ((stripe - (-c->width / 2 + c->screen_x)) * tex->width) / c->width;
+	if (tex_x < 0)
+		tex_x = 0;
+	else if (tex_x >= tex->width)
+		tex_x = tex->width - 1;
 	y = c->draw_start_y;
 	while (y < c->draw_end_y)
 	{
-		tex_y = ((y - WIN_H / 2 + c->height / 2) * tex->height) / c->height;
-		color = get_tex_pixel(tex, tex_x, tex_y);
-		if (color != -1)
-			put_sprite_pixel(g, stripe, y, color);
+		tex_y = ((y - c->draw_start_y) * tex->height) / c->height;
+		if (tex_y >= 0 && tex_y < tex->height)
+		{
+			color = get_tex_pixel(tex, tex_x, tex_y);
+			if (color != -1)
+				put_sprite_pixel(g, stripe, y, color);
+		}
 		y++;
 	}
 }

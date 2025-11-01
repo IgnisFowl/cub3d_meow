@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:28:04 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 15:33:03 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:35:49 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	draw_frame(t_game *game)
 	{
 		init_raycast(game, x);
 		perform_dda(game);
-        if (x >= 0 && x < WIN_W)
-            game->z_buffer[x] = game->raycast.perpwalldist;
+		if (x >= 0 && x < WIN_W)
+			game->z_buffer[x] = game->raycast.perpwalldist;
 		if (game->raycast.side == 0)
 			game->raycast.wall_x = game->pos_y + \
 			game->raycast.perpwalldist * game->raycast.raydiry;

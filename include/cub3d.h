@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 16:14:05 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:06:21 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ typedef struct s_game
 	t_texture	texture_east;
 	int			mouse_x;
 	int			mouse_last_x;
-	int			*z_buffer;
+	double		*z_buffer;
 	float   mouse_sensitivity;
 	t_cats		cats;
 }	t_game;

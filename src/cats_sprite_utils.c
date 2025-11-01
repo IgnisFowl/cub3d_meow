@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:30:31 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 13:36:44 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:58:14 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,25 @@ void	init_sprite_calc(t_game *g, t_sprite *s, t_spr_calc *c)
 
 void	calc_sprite_screen(t_spr_calc *c)
 {
+	double	scale_factor;
+	int		sprite_screen_height;
+	int     floor_level;
+
+	scale_factor = 1.5;
 	c->screen_x = (int)((WIN_W / 2) * (1 + c->trans_x / c->trans_y));
-	c->height = abs((int)(WIN_H / c->trans_y));
-	c->width = abs((int)(WIN_H / c->trans_y));
-	c->draw_start_y = -c->height / 2 + WIN_H / 2;
-	if (c->draw_start_y < 0)
-		c->draw_start_y = 0;
-	c->draw_end_y = c->height / 2 + WIN_H / 2;
-	if (c->draw_end_y >= WIN_H)
-		c->draw_end_y = WIN_H - 1;
+	sprite_screen_height = abs((int)(WIN_H / (c->trans_y * scale_factor)));
+	c->height = sprite_screen_height;
+	c->width = sprite_screen_height;
+
+    floor_level = WIN_H / 2 + (WIN_H / 1.5) / (c->trans_y + 0.1);
+    
+    c->draw_end_y = floor_level;
+    c->draw_start_y = c->draw_end_y - c->height;
+    
+    if (c->draw_start_y < 0)
+        c->draw_start_y = 0;
+    if (c->draw_end_y >= WIN_H)
+        c->draw_end_y = WIN_H - 1;
 }
 
 void	calc_sprite_bounds(t_spr_calc *c)

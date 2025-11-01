@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:33:33 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 13:37:58 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:39:43 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ static void	render_all_snacks(t_game *game)
 
 void	render_sprites(t_game *game)
 {
-	render_all_cats(game);
 	render_all_snacks(game);
+	render_all_cats(game);
 }
