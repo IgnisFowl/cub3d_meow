@@ -6,7 +6,7 @@
 /*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 12:15:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 12:21:59 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/01 12:34:16 by aarie-c2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@ void    rotate_camera(t_game *game, double angle)
 	old.x = angle;
 	apply_rotation(game, &old);
 }
+/*
+void    handle_mouse(t_game *game)
+{
+	int		mouse_y;
+	int		delta_x;
+	double	sensitivity;
+
+	mlx_mouse_get_pos(game->mlx, game->win, &game->mouse_x, &mouse_y);
+	if (game->first_mouse)
+	{
+		game->prev_mouse_x = game->mouse_x;
+		game->first_mouse = 0;
+		return ;
+	}
+	delta_x = game->mouse_x - game->prev_mouse_x;
+	sensitivity = 0.003;
+	rotate_camera(game, delta_x * sensitivity);
+	game->prev_mouse_x = game->mouse_x;
+}*/
 
 void    handle_mouse(t_game *game)
 {
@@ -67,6 +86,11 @@ int     mouse_move(int x, int y, t_game *game)
 		return (0);
 	}
 	delta_x = x - game->prev_mouse_x;
+	if (delta_x > 100 || delta_x < -100)
+	{
+		game->prev_mouse_x = x;
+		return (0);
+	}
 	sensitivity = 0.003;
 	rotate_camera(game, delta_x * sensitivity);
 	game->prev_mouse_x = x;
