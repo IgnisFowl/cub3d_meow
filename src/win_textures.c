@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:39:19 by aline-arthu       #+#    #+#             */
-/*   Updated: 2025/11/04 12:03:43 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 13:25:38 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,37 @@ void	load_fireworks_textures(t_game *game)
 	game->fireworks[2].x = (WIN_W * 5) / 6 - 256;
 	game->fireworks[2].y = WIN_H / 5;
 	game->fireworks[2].current_frame = 0;
+}
+
+static void	draw_firework_pixel(t_game *game, t_firework_draw *draw)
+{
+	char	*pixel;
+	int		color;
+
+	if (draw->tex_x < 0 || draw->tex_x >= draw->tex->width
+		|| draw->tex_y < 0 || draw->tex_y >= draw->tex->height)
+		return ;
+	pixel = draw->tex->addr + (draw->tex_y * draw->tex->line_len
+			+ draw->tex_x * (draw->tex->bpp / 8));
+	color = *(unsigned int *)pixel;
+	if (color != -1 && (color & 0x00FFFFFF) != 0)
+		mlx_pixel_put(game->mlx, game->win, draw->screen_x, draw->screen_y,
+			color);
+}
+
+void	draw_loop(t_game *game, t_firework_draw *draw)
+{
+	draw->tex_y = 0;
+	while (draw->tex_y < draw->tex->height * 4)
+	{
+		draw->tex_x = 0;
+		while (draw->tex_x < draw->tex->width * 4)
+		{
+			draw->screen_x = draw->fw->x + draw->tex_x;
+			draw->screen_y = draw->fw->y + draw->tex_y;
+			draw_firework_pixel(game, draw);
+			draw->tex_x++;
+		}
+		draw->tex_y++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 11:44:18 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 13:32:49 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,25 @@ typedef struct s_firework
 	int			current_frame;
 }	t_firework;
 
+typedef struct s_firework_draw
+{
+	t_firework	*fw;
+	t_texture	*tex;
+	int			tex_x;
+	int			tex_y;
+	int			screen_x;
+	int			screen_y;
+}	t_firework_draw;
+
+typedef struct s_win_draw
+{
+	t_texture	*tex;
+	int			tex_x;
+	int			tex_y;
+	int			screen_x;
+	int			screen_y;
+}	t_win_draw;
+
 typedef struct s_game
 {
 	t_map		*map;
@@ -210,6 +229,7 @@ typedef struct s_game
 	int			game_won;
 	int			win_timer;
 	t_firework	fireworks[3];
+	t_texture	win_screen;
 }	t_game;
 
 void		map_init(t_map *map);
@@ -286,6 +306,9 @@ const char	*get_cat_path(int type, int frame);
 void		check_win_condition(t_game *game);
 void		load_fireworks_textures(t_game *game);
 void		render_win_animation(t_game *game);
+void		draw_loop(t_game *game, t_firework_draw *draw);
+void		load_win_screen(t_game *game);
+void		draw_win_screen(t_game *game);
 
 void		exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void		free_map(t_map *map);

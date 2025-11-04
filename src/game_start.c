@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:27:32 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 11:39:02 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 13:36:43 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	mlx_starts(t_game *game)
 	init_player(game);
 	init_mouse(game);
 	init_cats(game);
+	load_win_screen(game);
 	load_fireworks_textures(game);
 	draw_frame(game);
 	mlx_hook(game->win, 17, 0, close_window, game);

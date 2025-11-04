@@ -43,6 +43,7 @@ SRC_FILES = \
 	minimap_tiles.c \
 	minimap_utils.c \
 	win_init.c \
+	win_load.c \
 	win_textures.c
 
 # Prepend SRCDIR/ to each file
