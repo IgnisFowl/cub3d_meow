@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_cats.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:46:45 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 15:29:28 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:09:29 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_cat_textures(t_game *game)
 	int	frame;
 
 	type = 0;
-	while (type < 3)
+	while (type < 9)
 	{
 		frame = 0;
 		while (frame < 3)

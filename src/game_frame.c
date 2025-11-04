@@ -68,10 +68,9 @@ static void	draw_frame_continue(t_game *game)
 {
 	render_sprites(game);
 	draw_minimap(game);
-	draw_snack_icon(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	minimap_present(game, 16, 16);
-	draw_snack_text(game);
+	draw_hud(game);
 }
 
 void	draw_frame(t_game *game)

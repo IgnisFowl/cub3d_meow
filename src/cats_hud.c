@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:28:32 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 14:39:56 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:35:52 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_hud_box(t_game *g)
 	while (y < WIN_H - 10)
 	{
 		x = 10;
-		while (x < 100)
+		while (x < 200)
 		{
 			draw_hud_pixel(g, x, y, 0x333333);
 			x++;
@@ -71,5 +71,28 @@ void	draw_snack_text(t_game *game)
 		0xFFFFFF, "x");
 	mlx_string_put(game->mlx, game->win, 78, WIN_H - 35,
 		0xFFFFFF, num);
+	free(num);
+}
+
+void	draw_hud(t_game *g)
+{
+	char	*num;
+	int	collected;
+
+	draw_hud_box(g);
+	draw_snack_icon(g);
+	num = ft_itoa(g->cats.snacks_inv);
+	mlx_string_put(g->mlx, g->win, 65, WIN_H - 35, 0xFFFFFF, "x");
+	mlx_string_put(g->mlx, g->win, 78, WIN_H - 35, 0xFFFFFF, num);
+	free(num);
+	draw_cat_icon(g, 95);
+	collected = get_collected_cats(g);
+	num = ft_itoa(collected);
+	mlx_string_put(g->mlx, g->win, 145, WIN_H - 35, 0xFFD700, "x");
+	mlx_string_put(g->mlx, g->win, 158, WIN_H - 35, 0xFFD700, num);
+	mlx_string_put(g->mlx, g->win, 175, WIN_H - 35, 0x888888, "/");
+	free(num);
+	num = ft_itoa(g->cats.num_cats);
+	mlx_string_put(g->mlx, g->win, 185, WIN_H - 35, 0x888888, num);
 	free(num);
 }

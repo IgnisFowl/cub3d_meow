@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:00:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 15:17:35 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:06:46 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	add_cat(t_game *g, int *idx, int x, int y)
 {
 	g->cats.cats[*idx].x = (double)x + 0.5;
 	g->cats.cats[*idx].y = (double)y + 0.5;
-	g->cats.cats[*idx].type = *idx % 3;
+	g->cats.cats[*idx].type = *idx % 9;
 	g->cats.cats[*idx].active = 1;
 	g->cats.cats[*idx].frame = 0;
 	g->cats.cats[*idx].dist = 0.0;

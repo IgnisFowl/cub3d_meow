@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_collision.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:20:41 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 13:22:13 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:17:11 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	try_collect_cat(t_game *game)
 	{
 		if (game->cats.cats[i].active)
 			if (is_near_sprite(game, &game->cats.cats[i]))
+			{
 				collect_cat(game, i);
+				check_win_condition(game);
+			}
 		i++;
 	}
 }

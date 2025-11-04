@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   cats_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 12:53:40 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 16:59:23 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:15:52 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	get_collected_cats(t_game *game)
+{
+	int	collected;
+	int	i;
+
+	collected = 0;
+	i = 0;
+	while (i < game->cats.num_cats)
+	{
+		if (!game->cats.cats[i].active)
+			collected++;
+		i++;
+	}
+	return (collected);
+}
 
 static int	count_map_char(t_game *game, char c)
 {

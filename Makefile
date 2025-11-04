@@ -17,6 +17,7 @@ SRC_FILES = \
 	cats_render_utils.c \
 	cats_sprite_utils.c \
 	cats_sprite.c \
+	cats_textures_utils.c \
 	cats_textures.c \
 	free_all.c \
 	free_cats.c \
@@ -40,7 +41,8 @@ SRC_FILES = \
 	minimap_fov_utils.c \
 	minimap_fov.c \
 	minimap_tiles.c \
-	minimap_utils.c
+	minimap_utils.c \
+	win_init.c
 
 # Prepend SRCDIR/ to each file
 SRC = $(addprefix $(SRCDIR)/,$(SRC_FILES))

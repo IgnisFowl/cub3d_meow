@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 17:06:21 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:18:27 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_cats
 	int			num_snacks;
 	int			snacks_inv;
 	double		anim_time;
-	t_texture	cat_textures[3][3];
+	t_texture	cat_textures[9][3];
 	t_texture	snack_texture;
 }   t_cats;
 
@@ -197,85 +197,90 @@ typedef struct s_game
 	int			mouse_x;
 	int			mouse_last_x;
 	double		*z_buffer;
-	float   mouse_sensitivity;
+	float   	mouse_sensitivity;
 	t_cats		cats;
+	int			game_won;
 }	t_game;
 
-void	map_init(t_map *map);
-void	start_map(char *argv, t_map *map);
-int		array_len(char **array);
-int		is_map_line(char *line);
-int		is_inside_map(t_map *map, int x, int y);
-void	add_map_line(char ***map_lines, char *line);
-int		parse_texture(t_map *map, char *line);
-int		parse_rgb(t_map *map, char *line);
-void	finalize_map(t_map *map, char **map_lines);
-void	normalize_map(t_map *map);
+void		map_init(t_map *map);
+void		start_map(char *argv, t_map *map);
+int			array_len(char **array);
+int			is_map_line(char *line);
+int			is_inside_map(t_map *map, int x, int y);
+void		add_map_line(char ***map_lines, char *line);
+int			parse_texture(t_map *map, char *line);
+int			parse_rgb(t_map *map, char *line);
+void		finalize_map(t_map *map, char **map_lines);
+void		normalize_map(t_map *map);
 
-void	start_game(t_map *map, t_game *game);
-void	draw_frame(t_game *game);
-void	perform_dda(t_game *game);
-void	calculate_draw_bound(t_game *game);
-void	draw_column(t_game *game, int x, int drawStart, int drawEnd);
+void		start_game(t_map *map, t_game *game);
+void		draw_frame(t_game *game);
+void		perform_dda(t_game *game);
+void		calculate_draw_bound(t_game *game);
+void		draw_column(t_game *game, int x, int drawStart, int drawEnd);
 
-int		game_loop(t_game *game);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-void	strafe_left(t_game *game, double move_speed);
-void	strafe_right(t_game *game, double move_speed);
+int			game_loop(t_game *game);
+int			key_press(int keycode, t_game *game);
+int			key_release(int keycode, t_game *game);
+void		strafe_left(t_game *game, double move_speed);
+void		strafe_right(t_game *game, double move_speed);
 
-void	init_player(t_game *game);
-void	game_init(t_game *game, t_map *map);
-void	prepare_texture_params(t_game *game);
-int		rgb_to_int(int rgb[3]);
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void	load_all_textures(t_game *game, t_map *map);
-void	raycast_struct_init(t_raycast *r);
+void		init_player(t_game *game);
+void		game_init(t_game *game, t_map *map);
+void		prepare_texture_params(t_game *game);
+int			rgb_to_int(int rgb[3]);
+void		my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void		load_all_textures(t_game *game, t_map *map);
+void		raycast_struct_init(t_raycast *r);
 
-void	minimap_present(t_game *g, int sx, int sy);
-void	draw_minimap(t_game *g);
-void	minimap_put_px(t_game *g, int x, int y, int color);
-int		c_str_len(const char *s);
-int		minimap_init(t_game *g);
-void	minimap_draw_tile(t_game *g, int tx, int ty, int color);
-int		minimap_tile_color(t_game *g, int x, int y);
-void	init_fov_pos(t_game *g, t_fov *f);
-void	calc_fov_edges(t_game *g, t_fov *f);
-void 	fov_to_triangle(t_fov *f, t_triangle *t);
-void 	tri_bounds(t_triangle *t, t_tri_bounds *b);
-int 	point_in_tri(t_triangle *t, int x, int y);
-void	draw_minimap_fov(t_game *g);
+void		minimap_present(t_game *g, int sx, int sy);
+void		draw_minimap(t_game *g);
+void		minimap_put_px(t_game *g, int x, int y, int color);
+int			c_str_len(const char *s);
+int			minimap_init(t_game *g);
+void		minimap_draw_tile(t_game *g, int tx, int ty, int color);
+int			minimap_tile_color(t_game *g, int x, int y);
+void		init_fov_pos(t_game *g, t_fov *f);
+void		calc_fov_edges(t_game *g, t_fov *f);
+void 		fov_to_triangle(t_fov *f, t_triangle *t);
+void 		tri_bounds(t_triangle *t, t_tri_bounds *b);
+int 		point_in_tri(t_triangle *t, int x, int y);
+void		draw_minimap_fov(t_game *g);
 
-int		mouse_move(int x, int y, t_game *game);
-int		focus_in(t_game *game);
-int		focus_out(t_game *game);
+int			mouse_move(int x, int y, t_game *game);
+int			focus_in(t_game *game);
+int			focus_out(t_game *game);
 
-void	clear_cats_from_map(t_game *game);
-void	parse_cats(t_game *game);
-void	init_cats(t_game *game);
-void	load_cats_textures(t_game *game);
-void	update_animations(t_game *game);
-void	check_snack_pickup(t_game *game);
-void	try_collect_cat(t_game *game);
-void	render_sprites(t_game *game);
-void	draw_one_sprite(t_game *g, t_sprite *s, t_texture *tex);
-void	put_sprite_pixel(t_game *g, int x, int y, int color);
-int		get_tex_pixel(t_texture *tex, int x, int y);
-void	calc_sprite_bounds(t_spr_calc *c);
-void	calc_sprite_screen(t_spr_calc *c);
-void	init_sprite_calc(t_game *g, t_sprite *s, t_spr_calc *c);
-void	update_all_distances(t_game *game);
-void	sort_all_sprites(t_game *game);
-void	draw_snack_icon(t_game *g);
-void	draw_snack_text(t_game *game);
-void	draw_hud_pixel(t_game *g, int x, int y, int color);
-int		get_snack_tex_pixel(t_game *g, int tex_x, int tex_y);
+void		clear_cats_from_map(t_game *game);
+void		parse_cats(t_game *game);
+void		init_cats(t_game *game);
+void		load_cats_textures(t_game *game);
+void		update_animations(t_game *game);
+void		check_snack_pickup(t_game *game);
+void		try_collect_cat(t_game *game);
+void		render_sprites(t_game *game);
+void		draw_one_sprite(t_game *g, t_sprite *s, t_texture *tex);
+void		put_sprite_pixel(t_game *g, int x, int y, int color);
+int			get_tex_pixel(t_texture *tex, int x, int y);
+void		calc_sprite_bounds(t_spr_calc *c);
+void		calc_sprite_screen(t_spr_calc *c);
+void		init_sprite_calc(t_game *g, t_sprite *s, t_spr_calc *c);
+void		update_all_distances(t_game *game);
+void		sort_all_sprites(t_game *game);
+void		draw_hud_pixel(t_game *g, int x, int y, int color);
+int			get_snack_tex_pixel(t_game *g, int tex_x, int tex_y);
+int			get_collected_cats(t_game *game);
+void		draw_hud(t_game *g);
+void		draw_cat_icon(t_game *g, int base_x);
+const char	*get_cat_path(int type, int frame);
+void		check_win_condition(t_game *game);
 
-void	exit_with_error(char *msg, t_map *map, t_game *game, char *str);
-void	free_map(t_map *map);
-void	free_arr(char ***arr);
-void	free_cats(t_game *game);
-int		close_window(t_game *game);
+
+void		exit_with_error(char *msg, t_map *map, t_game *game, char *str);
+void		free_map(t_map *map);
+void		free_arr(char ***arr);
+void		free_cats(t_game *game);
+int			close_window(t_game *game);
 
 void	print_map(const t_map *map); //deletar depois
 

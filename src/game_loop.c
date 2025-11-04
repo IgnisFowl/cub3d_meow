@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:03:03 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/01 15:34:20 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:33:46 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,13 @@ static void	rotate_right(t_game *game, double rot_speed)
 		game->plane_y * cos(rot_speed);
 }
 
-static void	rotate_left(t_game *game, double rot_speed)
-{
-	rotate_right(game, -rot_speed);
-}
-
-int	game_loop(t_game *game)
+static void	handle_movement(t_game *game)
 {
 	double	move_speed;
 	double	rot_speed;
 
 	move_speed = 0.05;
 	rot_speed = 0.03;
-	check_snack_pickup(game);
-	update_animations(game);
 	if (game->key_w)
 		move_forward(game, move_speed);
 	if (game->key_s)
@@ -80,9 +73,27 @@ int	game_loop(t_game *game)
 	if (game->key_d)
 		strafe_right(game, move_speed);
 	if (game->key_left)
-		rotate_left(game, rot_speed);
+		rotate_right(game, -rot_speed);
 	if (game->key_right)
 		rotate_right(game, rot_speed);
+}
+
+int	game_loop(t_game *game)
+{
+	int	timer;
+
+	timer = 0;
+	if (game->game_won)
+    {
+        render_win_animation(game);
+        timer++;
+        if (timer > 180)
+            close_window(game);
+        return (0);
+    }
+	check_snack_pickup(game);
+	update_animations(game);
+	handle_movement(game);
 	draw_frame(game);
 	return (0);
 }

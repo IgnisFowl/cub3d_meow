@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:21:37 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/24 17:05:39 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/04 11:19:50 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,20 @@ void	prepare_texture_params(t_game *game)
 	game->raycast.step = 1.0 * texture->height / game->raycast.lineheight;
 	game->raycast.tex_pos = (game->raycast.drawstart - \
 		WIN_H / 2 + game->raycast.lineheight / 2) * game->raycast.step;
+}
+
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
+{
+	char	*dst;
+	int		bpp_bytes;
+
+	if (!game || !game->addr)
+		return ;
+	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
+		return ;
+	bpp_bytes = game->bpp / 8;
+	if (bpp_bytes <= 0)
+		return ;
+	dst = game->addr + (y * game->line_len + x * bpp_bytes);
+	*(unsigned int *)dst = (unsigned int)color;
 }

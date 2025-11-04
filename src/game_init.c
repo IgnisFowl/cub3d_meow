@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 15:32:33 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:22:25 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	game_init_continue(t_game *game)
+{
+	game->z_buffer = malloc(sizeof(double) * WIN_W);
+	if (!game->z_buffer)
+		exit_with_error("Failed to allocate z_buffer", NULL, game, NULL);
+}
 
 void	game_init(t_game *game, t_map *map)
 {
@@ -36,9 +43,8 @@ void	game_init(t_game *game, t_map *map)
 	game->key_right = 0;
 	game->mouse_x = 0;
 	game->mouse_last_x = 0;
-	game->z_buffer = malloc(sizeof(double) * WIN_W);
-	if (!game->z_buffer)
-		exit_with_error("Failed to allocate z_buffer", NULL, game, NULL);
+	game->game_won = 0;
+	game_init_continue(game);
 }
 
 static void	set_dir_and_plane(t_game *game, t_vec dir, t_vec plane)
@@ -74,20 +80,4 @@ int	rgb_to_int(int rgb[3])
 	g = rgb[1];
 	b = rgb[2];
 	return ((r << 16) | (g << 8) | b);
-}
-
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
-{
-	char	*dst;
-	int		bpp_bytes;
-
-	if (!game || !game->addr)
-		return ;
-	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
-		return ;
-	bpp_bytes = game->bpp / 8;
-	if (bpp_bytes <= 0)
-		return ;
-	dst = game->addr + (y * game->line_len + x * bpp_bytes);
-	*(unsigned int *)dst = (unsigned int)color;
 }
