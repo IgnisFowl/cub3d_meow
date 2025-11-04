@@ -6,11 +6,31 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:46:45 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 11:09:29 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 11:43:58 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void    free_fireworks(t_game *game)
+{
+	int	fw;
+	int	frame;
+
+	fw = 0;
+	while (fw < 3)
+	{
+		frame = 0;
+		while (frame < 7)
+		{
+			if (game->fireworks[fw].textures[frame].img)
+				mlx_destroy_image(game->mlx, 
+					game->fireworks[fw].textures[frame].img);
+			frame++;
+		}
+		fw++;
+	}
+}
 
 void	free_cat_textures(t_game *game)
 {
@@ -47,4 +67,5 @@ void	free_cats(t_game *game)
 		game->cats.snacks = NULL;
 	}
 	free_cat_textures(game);
+	free_fireworks(game);
 }

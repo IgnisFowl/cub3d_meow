@@ -42,7 +42,8 @@ SRC_FILES = \
 	minimap_fov.c \
 	minimap_tiles.c \
 	minimap_utils.c \
-	win_init.c
+	win_init.c \
+	win_textures.c
 
 # Prepend SRCDIR/ to each file
 SRC = $(addprefix $(SRCDIR)/,$(SRC_FILES))

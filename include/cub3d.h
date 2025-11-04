@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 11:18:27 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 11:44:18 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,14 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
+typedef struct s_firework
+{
+	t_texture	textures[7];
+	int			x;
+	int			y;
+	int			current_frame;
+}	t_firework;
+
 typedef struct s_game
 {
 	t_map		*map;
@@ -200,6 +208,8 @@ typedef struct s_game
 	float   	mouse_sensitivity;
 	t_cats		cats;
 	int			game_won;
+	int			win_timer;
+	t_firework	fireworks[3];
 }	t_game;
 
 void		map_init(t_map *map);
@@ -274,7 +284,8 @@ void		draw_hud(t_game *g);
 void		draw_cat_icon(t_game *g, int base_x);
 const char	*get_cat_path(int type, int frame);
 void		check_win_condition(t_game *game);
-
+void		load_fireworks_textures(t_game *game);
+void		render_win_animation(t_game *game);
 
 void		exit_with_error(char *msg, t_map *map, t_game *game, char *str);
 void		free_map(t_map *map);

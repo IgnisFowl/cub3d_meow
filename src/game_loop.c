@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:03:03 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 11:33:46 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 11:48:49 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,16 @@ static void	handle_movement(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	int	timer;
-
-	timer = 0;
-	if (game->game_won)
-    {
-        render_win_animation(game);
-        timer++;
-        if (timer > 180)
-            close_window(game);
-        return (0);
-    }
 	check_snack_pickup(game);
 	update_animations(game);
 	handle_movement(game);
 	draw_frame(game);
+	if (game->game_won)
+	{
+		render_win_animation(game);
+		if (game->win_timer > 300)
+			close_window(game);
+		return (0);
+	}
 	return (0);
 }

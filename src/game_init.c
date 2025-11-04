@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 11:22:25 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 11:38:01 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	game_init(t_game *game, t_map *map)
 	game->mouse_x = 0;
 	game->mouse_last_x = 0;
 	game->game_won = 0;
+	game->win_timer = 0;
 	game_init_continue(game);
 }
 
