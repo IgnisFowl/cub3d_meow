@@ -6,11 +6,23 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:16:37 by aline-arthu       #+#    #+#             */
-/*   Updated: 2025/11/04 13:36:02 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 18:22:03 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	print_win(void)
+{
+	ft_printf("~~~~~*****~~~~*****~~~~*****~~~~~\n\n");
+	ft_printf("***  YOU WIN! PURR-FECT GAME! ***\n\n");
+	ft_printf("⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅\n");
+	ft_printf(" Thank you for playing our game!\n");
+	ft_printf(" From 42sp: nade-lim & aarie-c2\n");
+	ft_printf("⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅\n\n");
+	ft_printf("   Press esc to exit the game.\n\n");
+	ft_printf("~~~~~*****~~~~*****~~~~*****~~~~~\n");
+}
 
 void	check_win_condition(t_game *game)
 {
@@ -18,7 +30,10 @@ void	check_win_condition(t_game *game)
 
 	collected = get_collected_cats(game);
 	if (collected == game->cats.num_cats)
+	{
 		game->game_won = 1;
+		print_win();
+	}
 }
 
 void	draw_firework(t_game *game, int fw_idx)

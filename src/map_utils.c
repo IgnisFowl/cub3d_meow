@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:58:54 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 18:23:48 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void print_map(const t_map *map)
         else
             printf("(null)\n");
     }
+	ft_printf("\n ***  MEOWLCOME to our game! ***\n\n");
+	ft_printf(" ⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅\n\n");
+	ft_printf("Use WASD keys to walk, and use the\n");
+	ft_printf("arrow keys or the mouse to turn the\n");
+	ft_printf("camera around. Collect snacks, and\n");
+	ft_printf("feed the cats by pressing space key.\n\n");
+	ft_printf("✦✧✦✧✦✧✦✧     Good luck!    ✦✧✦✧✦✧✦✧\n\n");
+	ft_printf(" ⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅\n\n");
 }
 
 int	array_len(char **array)
