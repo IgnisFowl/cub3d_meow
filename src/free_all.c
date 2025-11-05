@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:30:35 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 16:08:48 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 23:26:59 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	free_textures(t_game *game)
 		mlx_destroy_image(game->mlx, game->texture_west.img);
 	if (game->texture_east.img)
 		mlx_destroy_image(game->mlx, game->texture_east.img);
+	if (game->start_img)
+		mlx_destroy_image(game->mlx, game->start_img);
 }
 
 void	free_imgt(t_game *game)

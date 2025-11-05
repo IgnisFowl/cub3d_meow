@@ -30,6 +30,7 @@ SRC_FILES = \
 	game_loop.c \
 	game_mouse_utils.c \
 	game_mouse.c \
+	game_raycast.c \
 	game_start.c \
 	game_textures.c \
 	main.c \

@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:27:32 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 13:36:43 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 23:23:54 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,20 @@ static void	mlx_starts(t_game *game)
 	mlx_loop(game->mlx);
 }
 
+static int	load_start_screen(t_game *g, char *path)
+{
+	int	w;
+	int	h;
+
+	if (!g || !g->mlx || !path)
+		return (0);
+	g->start_img = mlx_xpm_file_to_image(g->mlx, path, &w, &h);
+	if (!g->start_img)
+		return (0);
+	return (1);
+}
+
+
 void	start_game(t_map *map, t_game *game)
 {
 	game_init(game, map);
@@ -46,6 +60,8 @@ void	start_game(t_map *map, t_game *game)
 	game->win = mlx_new_window(game->mlx, WIN_W, WIN_H, "cub3d_meow");
 	if (!game->win)
 		exit_with_error("Failed to create window", map, game, NULL);
+	if (!load_start_screen(game, "textures/start_screen.xpm"))
+		exit_with_error("Failed to load start screen", map, game, NULL);
 	load_all_textures(game, map);
 	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	if (!game->img)

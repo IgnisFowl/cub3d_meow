@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:12:08 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/01 13:23:10 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 23:27:35 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	key_press(int keycode, t_game *game)
 {
+	if (game->game_started == 0)
+	{
+		game->game_started = 1;
+		return (0);
+	}
 	if (keycode == XK_w)
 		game->key_w = 1;
 	else if (keycode == XK_s)

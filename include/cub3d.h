@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 22:39:50 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 23:25:46 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,8 @@ typedef struct s_game
 	int			win_timer;
 	t_firework	fireworks[3];
 	t_texture	win_screen;
+	int			game_started;
+	void		*start_img;
 }	t_game;
 
 void		map_init(t_map *map);
@@ -262,6 +264,7 @@ int			rgb_to_int(int rgb[3]);
 void		my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void		load_all_textures(t_game *game, t_map *map);
 void		raycast_struct_init(t_raycast *r);
+void		init_raycast(t_game *game, int x);
 
 void		minimap_present(t_game *g, int sx, int sy);
 void		draw_minimap(t_game *g);
