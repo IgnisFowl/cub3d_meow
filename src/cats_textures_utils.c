@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:54:05 by aline-arthu       #+#    #+#             */
-/*   Updated: 2025/11/04 11:12:59 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 21:25:15 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static const char	*get_cat_path_6_to_8(int type, int frame)
 	if (type == 8 && frame == 1)
 		return ("textures/cat_white_ii.xpm");
 	if (type == 8 && frame == 2)
-		return ("textures/catf_white_iii.xpm");
+		return ("textures/cat_white_iii.xpm");
 	return (NULL);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:54:39 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/24 18:29:31 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/04 22:55:20 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	minimap_init(t_game *g)
 {
 	int	w;
 	int	h;
+	int max_w;
+	int max_h;
 
 	if (!g || !g->map || !g->mlx)
 		return (0);
@@ -46,12 +48,16 @@ int	minimap_init(t_game *g)
 		if (!g->imgt)
 			return (0);
 	}
-	if (TILE_SIZE <= 0)
-		return (0);
-	if (g->map->width <= 0 || g->map->height <= 0)
+	if (TILE_SIZE <= 0 || g->map->width <= 0 || g->map->height <= 0)
 		return (0);
 	w = g->map->width * TILE_SIZE;
 	h = g->map->height * TILE_SIZE;
+	max_w = WIN_W / 3;
+	max_h = WIN_H / 3;
+	if (w > max_w)
+		w = max_w;
+	if (h > max_h)
+		h = max_h;
 	return (minimap_img_init(g, w, h));
 }
 
@@ -87,11 +93,21 @@ void	minimap_present(t_game *g, int sx, int sy)
 {
 	int	screen_x;
 	int	screen_y;
+	int	min_spacing;
 
 	if (!g || !g->mlx || !g->win || !g->imgt || !g->imgt->img)
 		return ;
+	if (g->imgt->w <= 0 || g->imgt->h <= 0)
+		return ;
+	min_spacing = 20;
+	if (sy < min_spacing)
+		sy = min_spacing;
+	if (sx < min_spacing)
+		sx = min_spacing;
 	screen_x = WIN_W - g->imgt->w - sx;
 	screen_y = WIN_H - g->imgt->h - sy;
-
-	mlx_put_image_to_window(g->mlx, g->win, g->imgt->img, screen_x, screen_y);
+	if (screen_y + g->imgt->h > WIN_H)
+		screen_y = WIN_H - g->imgt->h - min_spacing;
+	mlx_put_image_to_window(g->mlx, g->win, g->imgt->img, \
+		screen_x, screen_y);
 }

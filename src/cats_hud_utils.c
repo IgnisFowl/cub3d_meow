@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 14:39:47 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 10:34:57 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 22:47:17 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,33 +55,32 @@ int get_cat_tex_pixel(t_game *g, int tex_x, int tex_y)
 	return (color);
 }
 
-void	draw_cat_pixel(t_game *g, int x, int y, int base_x)
+void	draw_cat_pixel(t_game *g, int x, int y)
 {
 	int	tex_x;
 	int	tex_y;
 	int	color;
+	int	hud_y;
 
 	tex_x = (x * g->cats.cat_textures[0][0].width) / 45;
 	tex_y = (y * g->cats.cat_textures[0][0].height) / 45;
 	color = get_cat_tex_pixel(g, tex_x, tex_y);
+	hud_y = WIN_H - 145;
 	if (color != -1 && (color & 0x00FFFFFF) != 0)
-		draw_hud_pixel(g, base_x + x, WIN_H - 59 + y, color);
+		draw_hud_pixel(g, 115 + x, hud_y + y, color);
 }
 
-void	draw_cat_icon(t_game *g, int base_x)
+void	draw_snack_pixel(t_game *g, int x, int y)
 {
-	int	x;
-	int	y;
+	int	tex_x;
+	int	tex_y;
+	int	color;
+	int	hud_y;
 
-	y = 0;
-	while (y < 45)
-	{
-		x = 0;
-		while (x < 45)
-		{
-			draw_cat_pixel(g, x, y, base_x);
-			x++;
-		}
-		y++;
-	}
+	tex_x = (x * g->cats.snack_texture.width) / 40;
+	tex_y = (y * g->cats.snack_texture.height) / 40;
+	color = get_snack_tex_pixel(g, tex_x, tex_y);
+	hud_y = WIN_H - 145;
+	if (color != -1 && (color & 0x00FFFFFF) != 0)
+		draw_hud_pixel(g, 33 + x, hud_y + y, color);
 }

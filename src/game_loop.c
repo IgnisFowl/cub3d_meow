@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:03:03 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 13:55:12 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 22:57:03 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	handle_movement(t_game *game)
 	double	move_speed;
 	double	rot_speed;
 
-	move_speed = 0.03;
-	rot_speed = 0.02;
+	move_speed = 0.05;
+	rot_speed = 0.03;
 	if (game->key_w)
 		move_forward(game, move_speed);
 	if (game->key_s)

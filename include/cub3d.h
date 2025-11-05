@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:32:49 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/04 22:39:50 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "../libft/include/libft.h"
 # include "../minilibx-linux/mlx.h"
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 1920
+# define WIN_H 1080
 # define COLOR_WALL 0x333333
 # define COLOR_FLOOR 0x101010
 # define COLOR_VISIBLE 0xFFFFFF
@@ -298,10 +298,14 @@ void		init_sprite_calc(t_game *g, t_sprite *s, t_spr_calc *c);
 void		update_all_distances(t_game *game);
 void		sort_all_sprites(t_game *game);
 void		draw_hud_pixel(t_game *g, int x, int y, int color);
+void		draw_cat_pixel(t_game *g, int x, int y);
+void		draw_snack_pixel(t_game *g, int x, int y);
 int			get_snack_tex_pixel(t_game *g, int tex_x, int tex_y);
 int			get_collected_cats(t_game *game);
 void		draw_hud(t_game *g);
-void		draw_cat_icon(t_game *g, int base_x);
+void		draw_hud_box(t_game *g);
+void		draw_snack_icon(t_game *g);
+void		draw_cat_icon(t_game *g);
 const char	*get_cat_path(int type, int frame);
 void		check_win_condition(t_game *game);
 void		load_fireworks_textures(t_game *game);

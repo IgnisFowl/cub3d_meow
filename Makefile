@@ -9,6 +9,7 @@ OBJDIR  = obj
 # List sources RELATIVE to SRCDIR (no wildcards)
 SRC_FILES = \
 	cats_collision.c \
+	cats_hud_draw.c \
 	cats_hud_utils.c \
 	cats_hud.c \
 	cats_init.c \

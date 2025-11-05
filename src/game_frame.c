@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:28:04 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 16:35:49 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/04 22:54:52 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	draw_frame_continue(t_game *game)
 	render_sprites(game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	minimap_present(game, 16, 16);
+	minimap_present(game, 16, 90);
 	draw_hud(game);
 }
 
