@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_final.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 11:38:02 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/06 14:55:46 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ static void	find_player_start(t_map *map)
 	}
 }
 
-void	finalize_map(t_map *map, char **map_lines)
+void	finalize_map(t_map *map, char **map_lines) /*alterar*/
 {
 	count_map_dimensions(map, map_lines);
 	copy_map_lines(map, map_lines);
+	validate_map(map);
 	find_player_start(map);
 	normalize_map(map);
 }

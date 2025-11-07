@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 15:55:37 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:28:58 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,15 @@ static void	parse_loop(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (line_is_blank(line) && map_started) /*incluir*/
+			exit_with_error("Empty line inside map", map, NULL, NULL); /*incluir*/
 		handle_line(line, map, &map_started, &map_lines);
 		free(line);
 		line = get_next_line(fd);
 	}
+	validate_config(map); /*incluir*/
+	sanitize_map_lines(map_lines); /*incluir*/
+	clean_trailing_lines(map_lines);  /*incluir*/
 	finalize_map(map, map_lines);
 	free_arr(&map_lines);
 }
@@ -90,5 +95,5 @@ void	start_map(char *argv, t_map *map)
 		parse_loop(fd, map);
 		close(fd);
 	}
-	print_map(map); //for debugging
+	// print_map(map); //for debugging
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 18:23:48 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/06 17:03:19 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	map_init(t_map *map)
 	map->texture_south = NULL;
 	map->texture_west = NULL;
 	map->texture_east = NULL;
-	map->color_floor[0] = 0;
-	map->color_floor[1] = 0;
-	map->color_floor[2] = 0;
-	map->color_ceiling[0] = 0;
-	map->color_ceiling[1] = 0;
-	map->color_ceiling[2] = 0;
+	map->color_floor[0] = -1; /* alterar as cores pra -1*/
+	map->color_floor[1] = -1;
+	map->color_floor[2] = -1;
+	map->color_ceiling[0] = -1;
+	map->color_ceiling[1] = -1;
+	map->color_ceiling[2] = -1; /* alterar as cores pra -1*/
 	map->width = 0;
 	map->height = 0;
 	map->map = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 23:25:46 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/06 17:28:26 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,6 @@ typedef struct s_game
 	int			win_timer;
 	t_firework	fireworks[3];
 	t_texture	win_screen;
-	int			game_started;
-	void		*start_img;
 }	t_game;
 
 void		map_init(t_map *map);
@@ -264,7 +262,6 @@ int			rgb_to_int(int rgb[3]);
 void		my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void		load_all_textures(t_game *game, t_map *map);
 void		raycast_struct_init(t_raycast *r);
-void		init_raycast(t_game *game, int x);
 
 void		minimap_present(t_game *g, int sx, int sy);
 void		draw_minimap(t_game *g);
@@ -322,6 +319,16 @@ void		free_map(t_map *map);
 void		free_arr(char ***arr);
 void		free_cats(t_game *game);
 int			close_window(t_game *game);
+
+void		validate_map(t_map *map);
+void		validate_cub_extension(char *filename, t_map *map);
+void		validate_config(t_map *map);
+int			line_is_blank(const char *s);
+void		check_required_colors(t_map *map);
+void		check_walls_closed(t_map *map);
+void		check_extra_lines_after_map(char **map_lines, t_map *map);
+void		sanitize_map_lines(char **map_lines);
+void		clean_trailing_lines(char **map_lines);
 
 void	print_map(const t_map *map); //deletar depois
 
