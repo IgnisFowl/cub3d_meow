@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:41 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/07 21:02:03 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/08 17:08:18 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,28 @@ void	check_required_colors(t_map *map)
 		exit_with_error("Missing floor or ceiling color", map, NULL, NULL);
 }
 
-int	validate_config(t_map *map)
+static int is_readable(const char *p)
 {
-	if (!map->texture_north || !map->texture_south
-		|| !map->texture_west || !map->texture_east)
-	{
-		return (0);
-	}
-	check_required_colors(map);
-	return (1);
+    int fd;
+
+    if (!p || access(p, R_OK) != 0)
+        return (0);
+    fd = open(p, O_RDONLY);
+    if (fd < 0)
+        return (0);
+    close(fd);
+    return (1);
 }
 
-int	line_is_blank(const char *s)
+int	validate_config(t_map *map)
 {
-	int	i;
-
-	if (!s)
-		return (1);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] != '\r')
-			return (0);
-		i++;
-	}
+	if (!map)
+		return (0);
+	if (!is_readable(map->texture_north)
+		|| !is_readable(map->texture_south)
+		|| !is_readable(map->texture_west)
+		|| !is_readable(map->texture_east))
+		return (0);
+	check_required_colors(map);
 	return (1);
 }

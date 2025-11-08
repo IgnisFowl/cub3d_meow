@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:43 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/06 17:30:53 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/08 17:07:19 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,20 @@ void	check_extra_lines_after_map(char **map_lines, t_map *map)
 		}
 		i++;
 	}
+}
+
+int	line_is_blank(const char *s)
+{
+	int	i;
+
+	if (!s)
+		return (1);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] != '\r')
+			return (0);
+		i++;
+	}
+	return (1);
 }
