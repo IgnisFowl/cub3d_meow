@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 15:55:37 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/07 21:02:48 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,19 @@ static void	parse_loop(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (line_is_blank(line) && map_started)
+			exit_with_error("Empty line inside map", map, NULL, NULL);
 		handle_line(line, map, &map_started, &map_lines);
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!validate_config(map))
+	{
+		exit_with_error("Missing one or more texture paths", map, NULL, NULL);
+		return ;
+	}
+	sanitize_map_lines(map_lines);
+	clean_trailing_lines(map_lines);
 	finalize_map(map, map_lines);
 	free_arr(&map_lines);
 }

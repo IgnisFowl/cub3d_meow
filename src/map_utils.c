@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 18:23:48 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/07 20:48:50 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	is_map_line(char *line)
 			&& line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W'
 			&& line[i] != 'C' && line[i] != 'B'
-			&& line[i] != ' ' && line[i] != '\t' 
+			&& line[i] != ' ' && line[i] != '\t'
 			&& line[i] != '\n')
 			return (0);
 		i++;
@@ -81,12 +81,12 @@ void	map_init(t_map *map)
 	map->texture_south = NULL;
 	map->texture_west = NULL;
 	map->texture_east = NULL;
-	map->color_floor[0] = 0;
-	map->color_floor[1] = 0;
-	map->color_floor[2] = 0;
-	map->color_ceiling[0] = 0;
-	map->color_ceiling[1] = 0;
-	map->color_ceiling[2] = 0;
+	map->color_floor[0] = -1;
+	map->color_floor[1] = -1;
+	map->color_floor[2] = -1;
+	map->color_ceiling[0] = -1;
+	map->color_ceiling[1] = -1;
+	map->color_ceiling[2] = -1;
 	map->width = 0;
 	map->height = 0;
 	map->map = NULL;

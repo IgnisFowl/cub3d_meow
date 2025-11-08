@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 23:25:46 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/07 21:01:10 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,16 @@ void		free_map(t_map *map);
 void		free_arr(char ***arr);
 void		free_cats(t_game *game);
 int			close_window(t_game *game);
+
+void		validate_map(t_map *map);
+void		validate_cub_extension(char *filename, t_map *map);
+int			validate_config(t_map *map);
+int			line_is_blank(const char *s);
+void		check_required_colors(t_map *map);
+void		check_walls_closed(t_map *map);
+void		check_extra_lines_after_map(char **map_lines, t_map *map);
+void		sanitize_map_lines(char **map_lines);
+void		clean_trailing_lines(char **map_lines);
 
 void	print_map(const t_map *map); //deletar depois
 

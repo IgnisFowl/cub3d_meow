@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:10:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 23:28:56 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/07 20:46:45 by aarie-c2@c1      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exit_with_error(char *msg, t_map *map, t_game *game, char *str)
 {
 	if (msg)
-		perror(msg);
+		ft_printf("Error\n%s\n", msg);
 	if (str)
 		free(str);
 	if (map)
@@ -34,6 +34,7 @@ static void	start(char *map_file)
 	if (!map)
 		return ;
 	map_init(map);
+	validate_cub_extension(map_file, map);
 	start_map(map_file, map);
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -52,10 +53,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	if (argc == 2)
-	{
-		//if (check_map)
 		start(argv[1]);
-	}
-	ft_printf("nice\n");
 	return (0);
 }

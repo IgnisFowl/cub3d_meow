@@ -44,6 +44,9 @@ SRC_FILES = \
 	minimap_fov.c \
 	minimap_tiles.c \
 	minimap_utils.c \
+	validate_map.c \
+	validate_map2.c \
+	validate_map3.c \
 	win_init.c \
 	win_load.c \
 	win_textures.c
