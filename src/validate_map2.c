@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:41 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/08 17:08:18 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/08 17:19:13 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ void	check_required_colors(t_map *map)
 
 static int is_readable(const char *p)
 {
-    int fd;
+	int	fd;
 
-    if (!p || access(p, R_OK) != 0)
-        return (0);
-    fd = open(p, O_RDONLY);
-    if (fd < 0)
-        return (0);
-    close(fd);
-    return (1);
+	if (!p)
+		return (0);
+	fd = open(p, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	return (1);
 }
 
 int	validate_config(t_map *map)
