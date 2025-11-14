@@ -6,7 +6,6 @@ LDFLAGS = -Lminilibx-linux -lmlx_Linux -L/usr/lib -lmlx -lX11 -lXext -lm
 SRCDIR  = src
 OBJDIR  = obj
 
-# List sources RELATIVE to SRCDIR (no wildcards)
 SRC_FILES = \
 	cats_collision.c \
 	cats_hud_draw.c \
@@ -47,14 +46,13 @@ SRC_FILES = \
 	validate_map.c \
 	validate_map2.c \
 	validate_map3.c \
+	validate_playable_map.c \
 	win_init.c \
 	win_load.c \
 	win_textures.c
 
-# Prepend SRCDIR/ to each file
 SRC = $(addprefix $(SRCDIR)/,$(SRC_FILES))
 
-# Map src/foo.c -> obj/foo.o (preserves any subfolders present)
 OBJ = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
 
 LIBFT_DIR = ./libft
@@ -71,7 +69,6 @@ $(LIBFT):
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
 
-# Ensure obj subdirs exist per source's path
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -O3 -c $< -o $@

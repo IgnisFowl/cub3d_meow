@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:43 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/08 17:07:19 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/14 16:54:46 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,22 @@ int	line_is_blank(const char *s)
 	while (s[i])
 	{
 		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] != '\r')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_only_digits(char *s)
+{
+	int	i;
+
+	if (!s || !*s)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
 			return (0);
 		i++;
 	}

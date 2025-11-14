@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:52:12 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/24 17:07:37 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:39:19 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	draw_wall_slice(t_game *game, int x, int drawStart, int drawEnd)
 	{
 		tex_y = (int)game->raycast.tex_pos & (texture->height - 1);
 		game->raycast.tex_pos += game->raycast.step;
-
 		color = *(int *)(texture->addr + (tex_y * \
 			texture->line_len + game->raycast.tex_x * (texture->bpp / 8)));
 		my_mlx_pixel_put(game, x, y, color);

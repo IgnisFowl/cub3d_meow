@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   game_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:28:04 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 23:28:12 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:45:40 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_start_screen(t_game *g)
+void	draw_start_screen(t_game *g)
 {
-    if (!g || !g->mlx || !g->win || !g->start_img)
-        return ;
-    mlx_put_image_to_window(g->mlx, g->win, g->start_img, 0, 0);
+	if (!g || !g->mlx || !g->win || !g->start_img)
+		return ;
+	mlx_put_image_to_window(g->mlx, g->win, g->start_img, 0, 0);
 }
 
 static void	draw_frame_continue(t_game *game)
 {
 	if (game->game_started == 0)
-    {
-        draw_start_screen(game);
-        return ;
-    }
+	{
+		draw_start_screen(game);
+		return ;
+	}
 	render_sprites(game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);

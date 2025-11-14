@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:27:32 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 23:23:54 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 14:55:31 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int	load_start_screen(t_game *g, char *path)
 		return (0);
 	return (1);
 }
-
 
 void	start_game(t_map *map, t_game *game)
 {

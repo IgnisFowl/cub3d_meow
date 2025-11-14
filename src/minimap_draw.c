@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:54:39 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 22:55:20 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:35:27 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	minimap_init(t_game *g)
 {
 	int	w;
 	int	h;
-	int max_w;
-	int max_h;
+	int	max_w;
+	int	max_h;
 
 	if (!g || !g->map || !g->mlx)
 		return (0);
@@ -82,7 +82,7 @@ void	draw_minimap(t_game *g)
 		y++;
 	}
 	g->map->player_x = (int)g->pos_x;
-    g->map->player_y = (int)g->pos_y;
+	g->map->player_y = (int)g->pos_y;
 	draw_minimap_fov(g);
 	if (g->map->player_x >= 0 && g->map->player_x < g->map->width
 		&& g->map->player_y >= 0 && g->map->player_y < g->map->height)

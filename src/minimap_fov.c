@@ -27,7 +27,7 @@ static void	fill_tri_row(t_game *g, t_triangle *t, t_tri_bounds *b, int y)
 
 static void	minimap_draw_tri(t_game *g, t_triangle *t, t_tri_bounds *b)
 {
-	int y;
+	int	y;
 
 	y = b->min_y;
 	while (y <= b->max_y)

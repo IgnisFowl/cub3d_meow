@@ -3,43 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 19:03:03 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 22:57:03 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/14 17:31:11 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	move_forward(t_game *game, double move_speed)
+static void	move_forward(t_game *game, double speed)
 {
-	int	new_x;
-	int	new_y;
+	double	nx;
+	double	ny;
+	double	pad;
 
-	new_x = (int)(game->pos_x + game->dir_x * move_speed);
-	new_y = (int)(game->pos_y + game->dir_y * move_speed);
-	if (is_inside_map(game->map, new_x, (int)game->pos_y) && \
-		game->map->map[(int)game->pos_y][new_x] != '1')
-		game->pos_x += game->dir_x * move_speed;
-	if (is_inside_map(game->map, (int)game->pos_x, new_y) && \
-		game->map->map[new_y][(int)game->pos_x] != '1')
-		game->pos_y += game->dir_y * move_speed;
+	pad = 0.3;
+	nx = game->pos_x + game->dir_x * speed;
+	ny = game->pos_y + game->dir_y * speed;
+	if (game->map->map[(int)game->pos_y][(int)(nx + pad)] != '1' &&
+		game->map->map[(int)game->pos_y][(int)(nx - pad)] != '1')
+		game->pos_x = nx;
+	if (game->map->map[(int)(ny + pad)][(int)game->pos_x] != '1' &&
+		game->map->map[(int)(ny - pad)][(int)game->pos_x] != '1')
+		game->pos_y = ny;
 }
 
-static void	move_backward(t_game *game, double move_speed)
+static void	move_backward(t_game *game, double speed)
 {
-	int	new_x;
-	int	new_y;
+	double	nx;
+	double	ny;
+	double	pad;
 
-	new_x = (int)(game->pos_x - game->dir_x * move_speed);
-	new_y = (int)(game->pos_y - game->dir_y * move_speed);
-	if (is_inside_map(game->map, new_x, (int)game->pos_y) && \
-		game->map->map[(int)game->pos_y][new_x] != '1')
-		game->pos_x -= game->dir_x * move_speed;
-	if (is_inside_map(game->map, (int)game->pos_x, new_y) && \
-		game->map->map[new_y][(int)game->pos_x] != '1')
-		game->pos_y -= game->dir_y * move_speed;
+	pad = 0.3;
+	nx = game->pos_x - game->dir_x * speed;
+	ny = game->pos_y - game->dir_y * speed;
+	if (game->map->map[(int)game->pos_y][(int)(nx + pad)] != '1' &&
+		game->map->map[(int)game->pos_y][(int)(nx - pad)] != '1')
+		game->pos_x = nx;
+	if (game->map->map[(int)(ny + pad)][(int)game->pos_x] != '1' &&
+		game->map->map[(int)(ny - pad)][(int)game->pos_x] != '1')
+		game->pos_y = ny;
 }
 
 static void	rotate_right(t_game *game, double rot_speed)

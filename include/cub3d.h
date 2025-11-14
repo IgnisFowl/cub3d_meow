@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/07 21:01:10 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/14 16:55:17 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,30 @@
 
 typedef struct s_fov
 {
-	int player_px;
-	int player_py;
-	int end_left_x;
-	int end_left_y;
-	int end_right_x;
-	int end_right_y;
+	int	player_px;
+	int	player_py;
+	int	end_left_x;
+	int	end_left_y;
+	int	end_right_x;
+	int	end_right_y;
 }	t_fov;
 
 typedef struct s_triangle
 {
-	int x0, y0;
-	int x1, y1;
-	int x2, y2;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
 }	t_triangle;
 
 typedef struct s_tri_bounds
 {
-	int min_x, max_x;
-	int min_y, max_y;
+	int	min_x;
+	int	max_x;
+	int	min_y;
+	int	max_y;
 }	t_tri_bounds;
 
 typedef struct s_texture
@@ -89,7 +94,7 @@ typedef struct s_sprite
 	int		active;
 	int		frame;
 	double	dist;
-}   t_sprite;
+}	t_sprite;
 
 typedef struct s_spr_calc
 {
@@ -117,7 +122,7 @@ typedef struct s_cats
 	double		anim_time;
 	t_texture	cat_textures[9][3];
 	t_texture	snack_texture;
-}   t_cats;
+}	t_cats;
 
 typedef struct s_map
 {
@@ -224,7 +229,7 @@ typedef struct s_game
 	int			mouse_x;
 	int			mouse_last_x;
 	double		*z_buffer;
-	float   	mouse_sensitivity;
+	float		mouse_sensitivity;
 	t_cats		cats;
 	int			game_won;
 	int			win_timer;
@@ -233,6 +238,12 @@ typedef struct s_game
 	int			game_started;
 	void		*start_img;
 }	t_game;
+
+typedef struct s_lim
+{
+	int	h;
+	int	w;
+}	t_lim;
 
 void		map_init(t_map *map);
 void		start_map(char *argv, t_map *map);
@@ -275,9 +286,9 @@ void		minimap_draw_tile(t_game *g, int tx, int ty, int color);
 int			minimap_tile_color(t_game *g, int x, int y);
 void		init_fov_pos(t_game *g, t_fov *f);
 void		calc_fov_edges(t_game *g, t_fov *f);
-void 		fov_to_triangle(t_fov *f, t_triangle *t);
-void 		tri_bounds(t_triangle *t, t_tri_bounds *b);
-int 		point_in_tri(t_triangle *t, int x, int y);
+void		fov_to_triangle(t_fov *f, t_triangle *t);
+void		tri_bounds(t_triangle *t, t_tri_bounds *b);
+int			point_in_tri(t_triangle *t, int x, int y);
 void		draw_minimap_fov(t_game *g);
 
 int			mouse_move(int x, int y, t_game *game);
@@ -332,7 +343,9 @@ void		check_walls_closed(t_map *map);
 void		check_extra_lines_after_map(char **map_lines, t_map *map);
 void		sanitize_map_lines(char **map_lines);
 void		clean_trailing_lines(char **map_lines);
+void		check_playable_map(t_map *map);
+int			is_only_digits(char *s);
 
-void	print_map(const t_map *map); //deletar depois
+void		print_welcome_message(void);
 
 #endif

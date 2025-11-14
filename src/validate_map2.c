@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:41 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/08 17:19:13 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:34:42 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	check_required_colors(t_map *map)
 		exit_with_error("Missing floor or ceiling color", map, NULL, NULL);
 }
 
-static int is_readable(const char *p)
+static int	is_readable(const char *p)
 {
 	int	fd;
 

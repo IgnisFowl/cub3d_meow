@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 11:38:01 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:34:56 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	init_player(t_game *game)
 {
 	game->pos_x = game->map->player_x + 0.5;
 	game->pos_y = game->map->player_y + 0.5;
-
 	if (game->map->player_dir == 'N')
 		set_dir_and_plane(game, (t_vec){0.0, -1.0}, (t_vec){0.66, 0.0});
 	else if (game->map->player_dir == 'S')

@@ -3,35 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/07 20:48:50 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:58:40 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
-void print_map(const t_map *map)
+void	print_welcome_message(void)
 {
-    if (!map || !map->map)
-    {
-        printf("Map is empty or not initialized.\n");
-        return;
-    }
-
-    printf("Map dimensions: %d x %d\n", map->width, map->height);
-    printf("Map data:\n");
-
-    for (int y = 0; y < map->height; y++)
-    {
-        printf("[%2d]: ", y);              // print line number padded to 2 digits
-        if (map->map[y])
-            printf("%.*s\n", map->width, map->map[y]); // print exactly map->width chars
-        else
-            printf("(null)\n");
-    }
 	ft_printf("\n ***  MEOWLCOME to our game! ***\n\n");
 	ft_printf(" ⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅⋆⋆⋅☆⋅⋆⋅★⋅\n\n");
 	ft_printf("Use WASD keys to walk, and use the\n");
@@ -116,16 +98,4 @@ void	add_map_line(char ***map_lines, char *line)
 	if (*map_lines)
 		free(*map_lines);
 	*map_lines = new_array;
-}
-
-int	is_inside_map(t_map *map, int x, int y)
-{
-	int	row_len;
-
-	if (y < 0 || y >= map->height)
-		return (0);
-	row_len = ft_strlen(map->map[y]);
-	if (x < 0 || x >= row_len)
-		return (0);
-	return (1);
 }

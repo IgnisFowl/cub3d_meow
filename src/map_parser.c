@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:11:02 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/10/21 22:35:21 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/14 16:54:36 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ static int	extract_rgb(char *line, int *rgb)
 	split = ft_split(line, ',');
 	if (!split || array_len(split) != 3)
 		return (0);
+	if (!is_only_digits(split[0])
+		|| !is_only_digits(split[1])
+		|| !is_only_digits(split[2]))
+	{
+		free_arr(&split);
+		return (0);
+	}
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);

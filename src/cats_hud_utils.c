@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_hud_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 14:39:47 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 22:47:17 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:34:09 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,20 @@ int	get_snack_tex_pixel(t_game *g, int tex_x, int tex_y)
 		return (-1);
 	if (tex_y < 0 || tex_y >= g->cats.snack_texture.height)
 		return (-1);
-	pixel = g->cats.snack_texture.addr + (tex_y * 
-		g->cats.snack_texture.line_len + tex_x * 
+	pixel = g->cats.snack_texture.addr + (tex_y * \
+		g->cats.snack_texture.line_len + tex_x * \
 		(g->cats.snack_texture.bpp / 8));
 	color = *(unsigned int *)pixel;
 	return (color);
 }
 
-int get_cat_tex_pixel(t_game *g, int tex_x, int tex_y)
+int	get_cat_tex_pixel(t_game *g, int tex_x, int tex_y)
 {
 	t_texture	*tex;
 	char		*pixel;
 	int			color;
 
 	tex = &g->cats.cat_textures[0][0];
-
 	if (tex_x < 0 || tex_x >= tex->width)
 		return (-1);
 	if (tex_y < 0 || tex_y >= tex->height)

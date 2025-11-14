@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_cats.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:46:45 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 13:33:37 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:34:25 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void    free_fireworks(t_game *game)
+static void	free_fireworks(t_game *game)
 {
 	int	fw;
 	int	frame;
@@ -24,7 +24,7 @@ static void    free_fireworks(t_game *game)
 		while (frame < 7)
 		{
 			if (game->fireworks[fw].textures[frame].img)
-				mlx_destroy_image(game->mlx, 
+				mlx_destroy_image(game->mlx,
 					game->fireworks[fw].textures[frame].img);
 			frame++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:21:37 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/04 11:19:50 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:39:03 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	load_all_textures(t_game *game, t_map *map)
 		exit_with_error("Failed to load east texture", map, game, NULL);
 }
 
-
 void	prepare_texture_params(t_game *game)
 {
 	t_texture	*texture;
@@ -65,7 +64,6 @@ void	prepare_texture_params(t_game *game)
 		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
 	if (game->raycast.side == 1 && game->raycast.raydiry < 0)
 		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
-
 	game->raycast.step = 1.0 * texture->height / game->raycast.lineheight;
 	game->raycast.tex_pos = (game->raycast.drawstart - \
 		WIN_H / 2 + game->raycast.lineheight / 2) * game->raycast.step;

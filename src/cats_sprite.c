@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   cats_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:32:57 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 17:06:48 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:31:31 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_sprite_stripe(t_game *g, t_spr_calc *c, t_texture *tex, int stripe)
+static void	draw_sprite_stripe(t_game *g, t_spr_calc *c, \
+	t_texture *tex, int stripe)
 {
 	int	y;
 	int	tex_x;
 	int	tex_y;
 	int	color;
 
-	if (stripe < 0 || stripe >= WIN_W || c->trans_y <= 0 || c->trans_y > g->z_buffer[stripe])
+	if (stripe < 0 || stripe >= WIN_W || c->trans_y <= 0 || \
+		c->trans_y > g->z_buffer[stripe])
 		return ;
 	tex_x = ((stripe - (-c->width / 2 + c->screen_x)) * tex->width) / c->width;
 	if (tex_x < 0)

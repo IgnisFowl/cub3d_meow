@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:10:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/07 20:46:45 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:56:48 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	start(char *map_file)
 	map_init(map);
 	validate_cub_extension(map_file, map);
 	start_map(map_file, map);
+	print_welcome_message();
 	game = malloc(sizeof(t_game));
 	if (!game)
 		exit_with_error("Failed to alloc game struct", map, NULL, NULL);
@@ -46,7 +47,6 @@ static void	start(char *map_file)
 
 int	main(int argc, char **argv)
 {
-
 	if (argc < 2)
 	{
 		ft_printf("Usage: ./cub3d map.cub\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_dda.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:43:45 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 13:56:08 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:29:00 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	calculate_draw_bound(t_game *game)
 	game->raycast.drawstart = -game->raycast.lineheight / 2 + WIN_H / 2;
 	if (game->raycast.drawstart < 0)
 		game->raycast.drawstart = 0;
-
 	game->raycast.drawend = game->raycast.lineheight / 2 + WIN_H / 2;
 	if (game->raycast.drawend >= WIN_H)
 		game->raycast.drawend = WIN_H - 1;

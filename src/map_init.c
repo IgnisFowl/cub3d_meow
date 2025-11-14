@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/08 17:14:00 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:55:09 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,4 @@ void	start_map(char *argv, t_map *map)
 		parse_loop(fd, map);
 		close(fd);
 	}
-	print_map(map); //for debugging
 }

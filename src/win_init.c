@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   win_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:16:37 by aline-arthu       #+#    #+#             */
-/*   Updated: 2025/11/04 18:22:03 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:32:01 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	print_win(void)
 
 void	check_win_condition(t_game *game)
 {
-	int collected;
+	int	collected;
 
 	collected = get_collected_cats(game);
 	if (collected == game->cats.num_cats)

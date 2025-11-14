@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_hud_draw.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 22:26:31 by aline-arthu       #+#    #+#             */
-/*   Updated: 2025/11/04 22:43:56 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:38:11 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	draw_hud_box(t_game *g)
 {
-	int x;
-	int y;
-	int start_y;
-	int end_y;
+	int	x;
+	int	y;
+	int	start_y;
+	int	end_y;
 
 	start_y = WIN_H - 160;
 	end_y = WIN_H - 90;

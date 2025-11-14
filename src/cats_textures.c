@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:07:06 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 10:58:33 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:23:40 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,24 @@ static void	load_cat_type(t_game *g, int type)
 	frame = 0;
 	while (frame < 3)
 	{
-        path = get_cat_path(type, frame);
-        if (!path)
-            return ;
-        tex = &g->cats.cat_textures[type][frame];
-        tex->img = mlx_xpm_file_to_image(g->mlx, (char *)path, 
-            &tex->width, &tex->height);
-        if (!tex->img)
-            return ;
-        tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, 
-            &tex->line_len, &tex->endian);
-        frame++;
+		path = get_cat_path(type, frame);
+		if (!path)
+			return ;
+		tex = &g->cats.cat_textures[type][frame];
+		tex->img = mlx_xpm_file_to_image(g->mlx, (char *)path, \
+			&tex->width, &tex->height);
+		if (!tex->img)
+			return ;
+		tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, \
+			&tex->line_len, &tex->endian);
+		frame++;
 	}
 }
 
 void	load_cats_textures(t_game *game)
 {
 	t_texture	*snack;
-    int			type;
+	int			type;
 
 	type = 0;
 	while (type < game->cats.num_cats)
@@ -69,6 +69,8 @@ void	load_cats_textures(t_game *game)
 		type++;
 	}
 	snack = &game->cats.snack_texture;
-	snack->img = mlx_xpm_file_to_image(game->mlx, "textures/churu.xpm", &snack->width, &snack->height);
-	snack->addr = mlx_get_data_addr(snack->img, &snack->bpp, &snack->line_len, &snack->endian);
+	snack->img = mlx_xpm_file_to_image(game->mlx, "textures/churu.xpm", \
+		&snack->width, &snack->height);
+	snack->addr = mlx_get_data_addr(snack->img, &snack->bpp, \
+		&snack->line_len, &snack->endian);
 }

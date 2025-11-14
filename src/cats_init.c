@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cats_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 12:53:40 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/04 11:15:52 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 14:55:08 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	init_cats_struct(t_game *game)
 	game->cats.anim_time = 0.0;
 }
 
-static void    alloc_cats_array(t_game *game)
+static void	alloc_cats_array(t_game *game)
 {
 	int	size_c;
 	int	size_s;

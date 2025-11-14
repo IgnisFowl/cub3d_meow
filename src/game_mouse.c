@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_mouse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2 <aarie-c2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 12:15:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/01 16:23:15 by aarie-c2         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:33:16 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static void	rotate_camera(t_game *game, double rot_amount)
 	game->dir_x = game->dir_x * cos(rot_amount) - game->dir_y * sin(rot_amount);
 	game->dir_y = old_dir_x * sin(rot_amount) + game->dir_y * cos(rot_amount);
 	old_plane_x = game->plane_x;
-	game->plane_x = game->plane_x * cos(rot_amount) - game->plane_y * sin(rot_amount);
-	game->plane_y = old_plane_x * sin(rot_amount) + game->plane_y * cos(rot_amount);
+	game->plane_x = game->plane_x * cos(rot_amount) - \
+	game->plane_y * sin(rot_amount);
+	game->plane_y = old_plane_x * sin(rot_amount) + \
+	game->plane_y * cos(rot_amount);
 }
 
 static int	is_large_jump(int delta)
@@ -58,7 +60,7 @@ static void	handle_edge_rotation(t_game *game, int x)
 
 int	mouse_move(int x, int y, t_game *game)
 {
-	int delta_x;
+	int	delta_x;
 
 	(void)y;
 	delta_x = x - game->mouse_last_x;

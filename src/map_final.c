@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_final.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/07 20:59:24 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/13 16:51:14 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,24 @@ static void	find_player_start(t_map *map)
 	}
 }
 
+int	is_inside_map(t_map *map, int x, int y)
+{
+	int	row_len;
+
+	if (y < 0 || y >= map->height)
+		return (0);
+	row_len = ft_strlen(map->map[y]);
+	if (x < 0 || x >= row_len)
+		return (0);
+	return (1);
+}
+
 void	finalize_map(t_map *map, char **map_lines)
 {
 	count_map_dimensions(map, map_lines);
 	copy_map_lines(map, map_lines);
 	validate_map(map);
 	find_player_start(map);
+	check_playable_map(map);
 	normalize_map(map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   win_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
+/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:31:26 by aline-arthu       #+#    #+#             */
-/*   Updated: 2025/11/04 13:41:43 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/13 15:28:36 by nade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	load_win_screen(t_game *game)
 {
-	game->win_screen.img = mlx_xpm_file_to_image(game->mlx,
-		"textures/youwin.xpm",
-		&game->win_screen.width,
+	game->win_screen.img = mlx_xpm_file_to_image(game->mlx, \
+		"textures/youwin.xpm", \
+		&game->win_screen.width, \
 		&game->win_screen.height);
 	if (!game->win_screen.img)
 		return ;
-	game->win_screen.addr = mlx_get_data_addr(game->win_screen.img,
-		&game->win_screen.bpp,
-		&game->win_screen.line_len,
+	game->win_screen.addr = mlx_get_data_addr(game->win_screen.img, \
+		&game->win_screen.bpp, \
+		&game->win_screen.line_len, \
 		&game->win_screen.endian);
 }
 
