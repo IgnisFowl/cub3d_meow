@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:09:44 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/06 16:59:23 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:42:52 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,28 @@ static void	clean_line(char *line)
 	}
 }
 
-static void	check_invalid_chars(t_map *map)
+static int	check_invalid_chars(t_game *game)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (y < map->height)
+	while (y < game->map->height)
 	{
-		clean_line(map->map[y]);
+		clean_line(game->map->map[y]);
 		x = 0;
-		while (map->map[y][x])
+		while (game->map->map[y][x])
 		{
-			if (!is_valid_tile(map->map[y][x]))
-				exit_with_error("Invalid character in map", map, NULL, NULL);
+			if (!is_valid_tile(game->map->map[y][x]))
+				return (0);
 			x++;
 		}
 		y++;
 	}
+	return (1);
 }
 
-static void	check_single_player(t_map *map)
+static int	check_single_player(t_game *game)
 {
 	int	count;
 	int	y;
@@ -66,22 +67,26 @@ static void	check_single_player(t_map *map)
 
 	count = 0;
 	y = -1;
-	while (++y < map->height)
+	while (++y < game->map->height)
 	{
 		x = -1;
-		while (++x < (int)ft_strlen(map->map[y]))
-			if (ft_strchr("NSEW", map->map[y][x]))
+		while (++x < (int)ft_strlen(game->map->map[y]))
+			if (ft_strchr("NSEW", game->map->map[y][x]))
 				count++;
 	}
 	if (count == 0)
-		exit_with_error("Map must contain a player", map, NULL, NULL);
+		return (0);
 	if (count > 1)
-		exit_with_error("Map must contain exactly one player", map, NULL, NULL);
+		return (0);
+	return (1);
 }
 
-void	validate_map(t_map *map)
+void	validate_map(t_game *game, char **map_lines)
 {
-	check_invalid_chars(map);
-	check_single_player(map);
-	check_walls_closed(map);
+	if (!check_invalid_chars(game) || !check_single_player(game) \
+	|| !check_walls_closed(game))
+	{
+		free_arr(&map_lines);
+		exit_with_error("Invalid map!", game, NULL);
+	}
 }

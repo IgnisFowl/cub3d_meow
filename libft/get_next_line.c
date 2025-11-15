@@ -109,7 +109,10 @@ static char	*ft_next(char *buffer)
 	}
 	new_buffer = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	if (!new_buffer)
+	{
+		free(buffer);
 		return (NULL);
+	}
 	i++;
 	while (buffer[i])
 		new_buffer[j++] = buffer[i++];

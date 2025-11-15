@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 08:42:20 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/13 16:34:56 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:29:28 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	game_init_continue(t_game *game)
 {
 	game->z_buffer = malloc(sizeof(double) * WIN_W);
 	if (!game->z_buffer)
-		exit_with_error("Failed to allocate z_buffer", NULL, game, NULL);
+		exit_with_error("Failed to allocate z_buffer", game, NULL);
 }
 
 void	game_init(t_game *game, t_map *map)

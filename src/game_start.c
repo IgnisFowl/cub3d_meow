@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:27:32 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/13 14:55:31 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:32:11 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,27 @@ static int	load_start_screen(t_game *g, char *path)
 	return (1);
 }
 
-void	start_game(t_map *map, t_game *game)
+void	start_game(t_game *game)
 {
-	game_init(game, map);
+	game_init(game, game->map);
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		exit_with_error("Failed to init MLX", map, game, NULL);
+		exit_with_error("Failed to init MLX", game, NULL);
 	game->win = mlx_new_window(game->mlx, WIN_W, WIN_H, "cub3d_meow");
 	if (!game->win)
-		exit_with_error("Failed to create window", map, game, NULL);
+		exit_with_error("Failed to create window", game, NULL);
 	if (!load_start_screen(game, "textures/start_screen.xpm"))
-		exit_with_error("Failed to load start screen", map, game, NULL);
-	load_all_textures(game, map);
+		exit_with_error("Failed to load start screen", game, NULL);
+	load_all_textures(game);
 	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	if (!game->img)
-		exit_with_error("Failed to create image", map, game, NULL);
+		exit_with_error("Failed to create image", game, NULL);
 	game->addr = mlx_get_data_addr(game->img, &game->bpp, \
 		&game->line_len, &game->endian);
 	if (!game->addr)
-		exit_with_error("Failed to get data address", map, game, NULL);
+		exit_with_error("Failed to get data address", game, NULL);
 	game->imgt = malloc(sizeof(t_img));
 	if (!game->imgt || !minimap_init(game))
-		exit_with_error("Failed to init minimap", map, game, NULL);
+		exit_with_error("Failed to init minimap", game, NULL);
 	mlx_starts(game);
 }

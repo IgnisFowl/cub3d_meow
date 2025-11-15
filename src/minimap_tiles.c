@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_tiles.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:25:08 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/24 18:34:38 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/15 12:33:00 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	minimap_draw_square(t_game *g, int x, int y, int color)
 			j++;
 		}
 		i++;
-	}	
+	}
 }
 
 void	minimap_draw_tile(t_game *g, int tx, int ty, int color)

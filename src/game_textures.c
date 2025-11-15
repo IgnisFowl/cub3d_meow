@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:21:37 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/11/13 15:39:03 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:32:33 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ static int	load_texture(t_game *game, t_texture *texture, char *path)
 	return (1);
 }
 
-void	load_all_textures(t_game *game, t_map *map)
+void	load_all_textures(t_game *game)
 {
-	if (!game || !game->mlx || !map)
-		exit_with_error("Failed to load_all_textures", map, game, NULL);
-	if (!load_texture(game, &game->texture_north, map->texture_north))
-		exit_with_error("Failed to load north texture", map, game, NULL);
-	if (!load_texture(game, &game->texture_south, map->texture_south))
-		exit_with_error("Failed to load south texture", map, game, NULL);
-	if (!load_texture(game, &game->texture_west, map->texture_west))
-		exit_with_error("Failed to load west texture", map, game, NULL);
-	if (!load_texture(game, &game->texture_east, map->texture_east))
-		exit_with_error("Failed to load east texture", map, game, NULL);
+	if (!game || !game->mlx || !game->map)
+		exit_with_error("Failed to load_all_textures", game, NULL);
+	if (!load_texture(game, &game->texture_north, game->map->texture_north))
+		exit_with_error("Failed to load north texture", game, NULL);
+	if (!load_texture(game, &game->texture_south, game->map->texture_south))
+		exit_with_error("Failed to load south texture", game, NULL);
+	if (!load_texture(game, &game->texture_west, game->map->texture_west))
+		exit_with_error("Failed to load west texture", game, NULL);
+	if (!load_texture(game, &game->texture_east, game->map->texture_east))
+		exit_with_error("Failed to load east texture", game, NULL);
 }
 
 void	prepare_texture_params(t_game *game)

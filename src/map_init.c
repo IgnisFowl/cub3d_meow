@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/13 16:55:09 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:33:18 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	process_config_line(char *trimmed, t_map *map)
+static int	process_config_line(char *trimmed, t_game *game)
 {
-	if (parse_texture(map, trimmed))
+	if (parse_texture(game->map, trimmed))
 		return (1);
-	if (parse_rgb(map, trimmed))
+	if (parse_rgb(game, trimmed))
 		return (1);
 	return (0);
 }
 
 static void	line_aux(char *line, char ***map_lines, \
-	t_map *map, int *map_started)
+	t_game *game, int *map_started)
 {
 	if (is_map_line(line))
 	{
@@ -31,10 +31,10 @@ static void	line_aux(char *line, char ***map_lines, \
 		return ;
 	}
 	else
-		exit_with_error("Invalid line", map, NULL, line);
+		exit_with_error("Invalid line", game, line);
 }
 
-static void	handle_line(char *line, t_map *map, \
+static void	handle_line(char *line, t_game *game, \
 	int *map_started, char ***map_lines)
 {
 	char	*trimmed;
@@ -47,8 +47,8 @@ static void	handle_line(char *line, t_map *map, \
 			free(trimmed);
 			return ;
 		}
-		if (!process_config_line(trimmed, map))
-			line_aux(line, map_lines, map, map_started);
+		if (!process_config_line(trimmed, game))
+			line_aux(line, map_lines, game, map_started);
 		free(trimmed);
 	}
 	else
@@ -59,7 +59,7 @@ static void	handle_line(char *line, t_map *map, \
 	}
 }
 
-static void	parse_loop(int fd, t_map *map)
+static void	parse_loop(int fd, t_game *game)
 {
 	char	*line;
 	int		map_started;
@@ -71,32 +71,34 @@ static void	parse_loop(int fd, t_map *map)
 	while (line)
 	{
 		if (line_is_blank(line) && map_started)
-			exit_with_error("Empty line inside map", map, NULL, NULL);
-		handle_line(line, map, &map_started, &map_lines);
+			exit_with_error("Empty line inside map", game, NULL);
+		handle_line(line, game, &map_started, &map_lines);
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (!validate_config(map))
+	if (!validate_config(game))
 	{
 		free_arr(&map_lines);
-		exit_with_error("Missing one or more texture paths", map, NULL, NULL);
+		exit_with_error("Missing one or more texture paths", game, NULL);
 	}
 	sanitize_map_lines(map_lines);
-	clean_trailing_lines(map_lines);
-	finalize_map(map, map_lines);
+	clean_trailing_lines(game, map_lines);
+	finalize_map(game, map_lines);
 	free_arr(&map_lines);
 }
 
-void	start_map(char *argv, t_map *map)
+void	start_map(char *argv, t_game *game)
 {
 	int		fd;
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		exit_with_error("Failed to open map.", map, NULL, NULL);
+		exit_with_error("Failed to open map.", game, NULL);
 	else
 	{
-		parse_loop(fd, map);
+		map_init(game->map);
+		validate_cub_extension(argv, game);
+		parse_loop(fd, game);
 		close(fd);
 	}
 }

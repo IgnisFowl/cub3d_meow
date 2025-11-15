@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_normalizer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarie-c2@c1r4p1.42sp.org.br <aarie-c2@c    +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 22:37:46 by aarie-c2@c1       #+#    #+#             */
-/*   Updated: 2025/10/24 11:39:26 by aarie-c2@c1      ###   ########.fr       */
+/*   Updated: 2025/11/15 12:21:55 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,31 @@ static char	*alloc_and_copy_row(char *old, int len, int width)
 	return (new_row);
 }
 
-static void	pad_rows_with_walls(t_map *map)
+static void	pad_rows_with_walls(t_game *game)
 {
 	int		y;
 	int		len;
 	char	*new_row;
 
 	y = 0;
-	while (y < map->height)
+	while (y < game->map->height)
 	{
-		len = ft_strlen(map->map[y]);
-		if (len < map->width)
+		len = ft_strlen(game->map->map[y]);
+		if (len < game->map->width)
 		{
-			new_row = alloc_and_copy_row(map->map[y], len, map->width);
+			new_row = alloc_and_copy_row(game->map->map[y], \
+				len, game->map->width);
 			if (!new_row)
-				exit_with_error("Row alloc failed", map, NULL, NULL);
-			free(map->map[y]);
-			map->map[y] = new_row;
+				exit_with_error("Row alloc failed", game, NULL);
+			free(game->map->map[y]);
+			game->map->map[y] = new_row;
 		}
 		y++;
 	}
 }
 
-void	normalize_map(t_map *map)
+void	normalize_map(t_game *game)
 {
-	pad_rows_with_walls(map);
-	replace_spaces_with_walls(map);
+	pad_rows_with_walls(game);
+	replace_spaces_with_walls(game->map);
 }

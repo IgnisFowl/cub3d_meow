@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:10:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/13 16:56:48 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:34:25 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	exit_with_error(char *msg, t_map *map, t_game *game, char *str)
+void	exit_with_error(char *msg, t_game *game, char *str)
 {
 	if (msg)
 		ft_printf("Error\n%s\n", msg);
 	if (str)
 		free(str);
-	if (map)
-		free_map(map);
 	if (game)
 		close_window(game);
 	exit(1);
@@ -27,22 +25,20 @@ void	exit_with_error(char *msg, t_map *map, t_game *game, char *str)
 
 static void	start(char *map_file)
 {
-	t_map	*map;
 	t_game	*game;
 
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return ;
-	map_init(map);
-	validate_cub_extension(map_file, map);
-	start_map(map_file, map);
-	print_welcome_message();
 	game = malloc(sizeof(t_game));
 	if (!game)
-		exit_with_error("Failed to alloc game struct", map, NULL, NULL);
+		exit_with_error("Failed to alloc game struct", game, NULL);
 	ft_memset(game, 0, sizeof(t_game));
+	game->map = malloc(sizeof(t_map));
+	if (!game->map)
+		return ;
+	ft_memset(game->map, 0, sizeof(t_map));
+	start_map(map_file, game);
+	print_welcome_message();
 	game->game_started = 0;
-	start_game(map, game);
+	start_game(game);
 }
 
 int	main(int argc, char **argv)

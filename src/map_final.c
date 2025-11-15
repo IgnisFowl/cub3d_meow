@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_final.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/13 16:51:14 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:41:26 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ static void	count_map_dimensions(t_map *map, char **map_lines)
 	map->height = i;
 }
 
-static void	copy_map_lines(t_map *map, char **map_lines)
+static void	copy_map_lines(t_game *game, char **map_lines)
 {
 	int	y;
 
-	map->map = malloc(sizeof(char *) * (map->height + 1));
-	if (!map->map)
-		exit_with_error("Map alloc failed", map, NULL, NULL);
+	game->map->map = malloc(sizeof(char *) * (game->map->height + 1));
+	if (!game->map->map)
+		exit_with_error("Map alloc failed", game, NULL);
 	y = 0;
-	while (y < map->height)
+	while (y < game->map->height)
 	{
-		map->map[y] = ft_strdup(map_lines[y]);
-		if (!map->map[y])
-			exit_with_error("Line strdup failed", map, NULL, NULL);
+		game->map->map[y] = ft_strdup(map_lines[y]);
+		if (!game->map->map[y])
+			exit_with_error("Line strdup failed", game, NULL);
 		y++;
 	}
-	map->map[y] = NULL;
+	game->map->map[y] = NULL;
 }
 
 static void	find_player_start(t_map *map)
@@ -81,12 +81,12 @@ int	is_inside_map(t_map *map, int x, int y)
 	return (1);
 }
 
-void	finalize_map(t_map *map, char **map_lines)
+void	finalize_map(t_game *game, char **map_lines)
 {
-	count_map_dimensions(map, map_lines);
-	copy_map_lines(map, map_lines);
-	validate_map(map);
-	find_player_start(map);
-	check_playable_map(map);
-	normalize_map(map);
+	count_map_dimensions(game->map, map_lines);
+	copy_map_lines(game, map_lines);
+	validate_map(game, map_lines);
+	find_player_start(game->map);
+	check_playable_map(game);
+	normalize_map(game);
 }

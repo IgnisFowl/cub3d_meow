@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:16:19 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/13 16:58:40 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:21:09 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	add_map_line(char ***map_lines, char *line)
 	len = array_len(*map_lines);
 	new_array = malloc(sizeof(char *) * (len + 2));
 	if (!new_array)
-		exit_with_error("Mem alloc failed", NULL, NULL, line);
+		exit_with_error("Mem alloc failed", NULL, line);
 	while (i < len)
 	{
 		new_array[i] = (*map_lines)[i];

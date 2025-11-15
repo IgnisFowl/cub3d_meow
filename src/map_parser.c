@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:11:02 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/14 16:54:36 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:28:56 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ static int	extract_rgb(char *line, int *rgb)
 	return (1);
 }
 
-int	parse_rgb(t_map *map, char *line)
+int	parse_rgb(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
-		if (!extract_rgb(line + 2, map->color_floor))
-			exit_with_error("Invalid floor RGB format", map, NULL, NULL);
+		if (!extract_rgb(line + 2, game->map->color_floor))
+			exit_with_error("Invalid floor RGB format", game, line);
 		return (1);
 	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
-		if (!extract_rgb(line + 2, map->color_ceiling))
-			exit_with_error("Invalid ceiling RGB format", map, NULL, NULL);
+		if (!extract_rgb(line + 2, game->map->color_ceiling))
+			exit_with_error("Invalid ceiling RGB format", game, line);
 		return (1);
 	}
 	return (0);

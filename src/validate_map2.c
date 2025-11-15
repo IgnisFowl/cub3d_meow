@@ -3,65 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:41 by nade-lim          #+#    #+#             */
-/*   Updated: 2025/11/13 16:34:42 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:42:00 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_walls_closed(t_map *map)
+int	check_walls_closed(t_game *game)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (y < map->height)
+	while (y < game->map->height)
 	{
 		x = 0;
-		while (map->map[y][x])
+		while (game->map->map[y][x])
 		{
-			if (map->map[y][x] == '0' && (
-				y == 0 || x == 0 || y == map->height - 1
-				|| x == (int)ft_strlen(map->map[y]) - 1
-				|| map->map[y - 1][x] == ' '
-				|| map->map[y + 1][x] == ' '
-				|| map->map[y][x - 1] == ' '
-				|| map->map[y][x + 1] == ' '))
-				exit_with_error("Map not closed", map, NULL, NULL);
+			if (game->map->map[y][x] == '0' && (
+				y == 0 || x == 0 || y == game->map->height - 1
+				|| x == (int)ft_strlen(game->map->map[y]) - 1
+				|| game->map->map[y - 1][x] == ' '
+				|| game->map->map[y + 1][x] == ' '
+				|| game->map->map[y][x - 1] == ' '
+				|| game->map->map[y][x + 1] == ' '))
+				return (0);
 			x++;
 		}
 		y++;
 	}
+	return (1);
 }
 
-void	validate_cub_extension(char *filename, t_map *map)
+void	validate_cub_extension(char *filename, t_game *game)
 {
 	int	len;
 
 	len = ft_strlen(filename);
 	if (len < 5)
-		exit_with_error("Invalid file name", map, NULL, NULL);
+		exit_with_error("Invalid file name", game, NULL);
 	if (ft_strncmp(filename + len - 4, ".cub", 4) != 0)
-		exit_with_error("Invalid file extension (expected .cub)" \
-			, map, NULL, NULL);
+		exit_with_error("Invalid file extension (expected .cub)", game, NULL);
 }
 
-void	check_required_colors(t_map *map)
+void	check_required_colors(t_game *game)
 {
 	int	floor_defined;
 	int	ceiling_defined;
 
-	floor_defined = (map->color_floor[0] != -1
-			|| map->color_floor[1] != -1
-			|| map->color_floor[2] != -1);
-	ceiling_defined = (map->color_ceiling[0] != -1
-			|| map->color_ceiling[1] != -1
-			|| map->color_ceiling[2] != -1);
+	floor_defined = (game->map->color_floor[0] != -1
+			|| game->map->color_floor[1] != -1
+			|| game->map->color_floor[2] != -1);
+	ceiling_defined = (game->map->color_ceiling[0] != -1
+			|| game->map->color_ceiling[1] != -1
+			|| game->map->color_ceiling[2] != -1);
 	if (!floor_defined || !ceiling_defined)
-		exit_with_error("Missing floor or ceiling color", map, NULL, NULL);
+		exit_with_error("Missing floor or ceiling color", game, NULL);
 }
 
 static int	is_readable(const char *p)
@@ -77,15 +77,15 @@ static int	is_readable(const char *p)
 	return (1);
 }
 
-int	validate_config(t_map *map)
+int	validate_config(t_game *game)
 {
-	if (!map)
+	if (!game->map)
 		return (0);
-	if (!is_readable(map->texture_north)
-		|| !is_readable(map->texture_south)
-		|| !is_readable(map->texture_west)
-		|| !is_readable(map->texture_east))
+	if (!is_readable(game->map->texture_north)
+		|| !is_readable(game->map->texture_south)
+		|| !is_readable(game->map->texture_west)
+		|| !is_readable(game->map->texture_east))
 		return (0);
-	check_required_colors(map);
+	check_required_colors(game);
 	return (1);
 }

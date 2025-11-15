@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nade-lim <nade-lim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/14 16:55:17 by nade-lim         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:29:14 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,17 +246,17 @@ typedef struct s_lim
 }	t_lim;
 
 void		map_init(t_map *map);
-void		start_map(char *argv, t_map *map);
+void		start_map(char *argv, t_game *game);
 int			array_len(char **array);
 int			is_map_line(char *line);
 int			is_inside_map(t_map *map, int x, int y);
 void		add_map_line(char ***map_lines, char *line);
 int			parse_texture(t_map *map, char *line);
-int			parse_rgb(t_map *map, char *line);
-void		finalize_map(t_map *map, char **map_lines);
-void		normalize_map(t_map *map);
+int			parse_rgb(t_game *game, char *trimmed);
+void		finalize_map(t_game *game, char **map_lines);
+void		normalize_map(t_game *game);
 
-void		start_game(t_map *map, t_game *game);
+void		start_game(t_game *game);
 void		draw_frame(t_game *game);
 void		perform_dda(t_game *game);
 void		calculate_draw_bound(t_game *game);
@@ -273,7 +273,7 @@ void		game_init(t_game *game, t_map *map);
 void		prepare_texture_params(t_game *game);
 int			rgb_to_int(int rgb[3]);
 void		my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void		load_all_textures(t_game *game, t_map *map);
+void		load_all_textures(t_game *game);
 void		raycast_struct_init(t_raycast *r);
 void		init_raycast(t_game *game, int x);
 
@@ -328,22 +328,21 @@ void		draw_loop(t_game *game, t_firework_draw *draw);
 void		load_win_screen(t_game *game);
 void		draw_win_screen(t_game *game);
 
-void		exit_with_error(char *msg, t_map *map, t_game *game, char *str);
+void		exit_with_error(char *msg, t_game *game, char *str);
 void		free_map(t_map *map);
 void		free_arr(char ***arr);
 void		free_cats(t_game *game);
 int			close_window(t_game *game);
 
-void		validate_map(t_map *map);
-void		validate_cub_extension(char *filename, t_map *map);
-int			validate_config(t_map *map);
+void		validate_map(t_game *game, char **map_lines);
+void		validate_cub_extension(char *filename, t_game *game);
+int			validate_config(t_game *game);
 int			line_is_blank(const char *s);
-void		check_required_colors(t_map *map);
-void		check_walls_closed(t_map *map);
-void		check_extra_lines_after_map(char **map_lines, t_map *map);
+void		check_required_colors(t_game *game);
+int			check_walls_closed(t_game *game);
 void		sanitize_map_lines(char **map_lines);
-void		clean_trailing_lines(char **map_lines);
-void		check_playable_map(t_map *map);
+void		clean_trailing_lines(t_game *game, char **map_lines);
+void		check_playable_map(t_game *game);
 int			is_only_digits(char *s);
 
 void		print_welcome_message(void);
