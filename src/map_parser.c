@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:11:02 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/15 13:28:56 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/15 14:08:27 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,53 +38,27 @@ int	parse_texture(t_map *map, char *line)
 	return (0);
 }
 
-static int	is_valid_rgb(int c)
+int	process_config_line(char *trimmed, t_game *game)
 {
-	return (c >= 0 && c <= 255);
-}
+	int	result;
 
-static int	extract_rgb(char *line, int *rgb)
-{
-	char	**split;
-	int		r;
-	int		g;
-	int		b;
-
-	split = ft_split(line, ',');
-	if (!split || array_len(split) != 3)
-		return (0);
-	if (!is_only_digits(split[0])
-		|| !is_only_digits(split[1])
-		|| !is_only_digits(split[2]))
-	{
-		free_arr(&split);
-		return (0);
-	}
-	r = ft_atoi(split[0]);
-	g = ft_atoi(split[1]);
-	b = ft_atoi(split[2]);
-	free_arr(&split);
-	if (!is_valid_rgb(r) || !is_valid_rgb(g) || !is_valid_rgb(b))
-		return (0);
-	rgb[0] = r;
-	rgb[1] = g;
-	rgb[2] = b;
-	return (1);
-}
-
-int	parse_rgb(t_game *game, char *line)
-{
-	if (ft_strncmp(line, "F ", 2) == 0)
-	{
-		if (!extract_rgb(line + 2, game->map->color_floor))
-			exit_with_error("Invalid floor RGB format", game, line);
+	if (parse_texture(game->map, trimmed))
 		return (1);
-	}
-	else if (ft_strncmp(line, "C ", 2) == 0)
-	{
-		if (!extract_rgb(line + 2, game->map->color_ceiling))
-			exit_with_error("Invalid ceiling RGB format", game, line);
+	result = parse_rgb(game, trimmed);
+	if (result < 0)
+		return (result);
+	if (result > 0)
 		return (1);
-	}
 	return (0);
+}
+
+int	line_aux(char *line, char ***map_lines, int *map_started)
+{
+	if (is_map_line(line))
+	{
+		*map_started = 1;
+		add_map_line(map_lines, ft_strdup(line));
+		return (0);
+	}
+	return (-3);
 }

@@ -6,38 +6,27 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 09:41:36 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/15 13:33:18 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/15 14:11:54 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	process_config_line(char *trimmed, t_game *game)
+static void	handle_parse_error(int code, t_game *game)
 {
-	if (parse_texture(game->map, trimmed))
-		return (1);
-	if (parse_rgb(game, trimmed))
-		return (1);
-	return (0);
+	if (code == -1)
+		exit_with_error("Invalid floor RGB format", game, NULL);
+	else if (code == -2)
+		exit_with_error("Invalid ceiling RGB format", game, NULL);
+	else if (code == -3)
+		exit_with_error("Invalid line", game, NULL);
 }
 
-static void	line_aux(char *line, char ***map_lines, \
-	t_game *game, int *map_started)
-{
-	if (is_map_line(line))
-	{
-		*map_started = 1;
-		add_map_line(map_lines, ft_strdup(line));
-		return ;
-	}
-	else
-		exit_with_error("Invalid line", game, line);
-}
-
-static void	handle_line(char *line, t_game *game, \
+static int	handle_line(char *line, t_game *game, \
 	int *map_started, char ***map_lines)
 {
 	char	*trimmed;
+	int		result;
 
 	if (!*map_started)
 	{
@@ -45,18 +34,42 @@ static void	handle_line(char *line, t_game *game, \
 		if (!trimmed || !*trimmed)
 		{
 			free(trimmed);
-			return ;
+			return (0);
 		}
-		if (!process_config_line(trimmed, game))
-			line_aux(line, map_lines, game, map_started);
+		result = process_config_line(trimmed, game);
+		if (result == 0)
+			result = line_aux(line, map_lines, map_started);
 		free(trimmed);
+		return (result);
 	}
 	else
 	{
 		if (line[0] == '\n')
-			return ;
+			return (0);
 		add_map_line(map_lines, ft_strdup(line));
 	}
+	return (0);
+}
+
+static int	process_line(char *line, t_game *game, \
+    int *map_started, char ***map_lines)
+{
+	int	error_code;
+
+	if (line_is_blank(line) && *map_started)
+	{
+		free(line);
+		exit_with_error("Empty line inside map", game, NULL);
+	}
+	error_code = handle_line(line, game, map_started, map_lines);
+	free(line);
+	if (error_code < 0)
+	{
+		free_arr(map_lines);
+		get_next_line(-1);
+		handle_parse_error(error_code, game);
+	}
+	return (0);
 }
 
 static void	parse_loop(int fd, t_game *game)
@@ -70,10 +83,7 @@ static void	parse_loop(int fd, t_game *game)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line_is_blank(line) && map_started)
-			exit_with_error("Empty line inside map", game, NULL);
-		handle_line(line, game, &map_started, &map_lines);
-		free(line);
+		process_line(line, game, &map_started, &map_lines);
 		line = get_next_line(fd);
 	}
 	if (!validate_config(game))

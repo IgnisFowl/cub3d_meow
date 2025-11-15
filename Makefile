@@ -37,6 +37,7 @@ SRC_FILES = \
 	map_init.c \
 	map_normalizer.c \
 	map_parser.c \
+	map_rgb.c \
 	map_utils.c \
 	minimap_draw.c \
 	minimap_fov_utils.c \

@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/15 13:50:26 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/15 14:09:49 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,9 @@ int			parse_texture(t_map *map, char *line);
 int			parse_rgb(t_game *game, char *trimmed);
 void		finalize_map(t_game *game, char **map_lines);
 void		normalize_map(t_game *game);
+int			parse_rgb(t_game *game, char *line);
+int			process_config_line(char *trimmed, t_game *game);
+int			line_aux(char *line, char ***map_lines, int *map_started);
 
 void		start_game(t_game *game);
 void		draw_frame(t_game *game);
