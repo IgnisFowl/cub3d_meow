@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:07:16 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/15 13:29:14 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/15 13:50:26 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,7 @@ void		check_required_colors(t_game *game);
 int			check_walls_closed(t_game *game);
 void		sanitize_map_lines(char **map_lines);
 void		clean_trailing_lines(t_game *game, char **map_lines);
-void		check_playable_map(t_game *game);
+int			check_playable_map(t_game *game);
 int			is_only_digits(char *s);
 
 void		print_welcome_message(void);

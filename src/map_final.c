@@ -6,7 +6,7 @@
 /*   By: aline-arthur <aline-arthur@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:45:46 by aarie-c2          #+#    #+#             */
-/*   Updated: 2025/11/15 12:41:26 by aline-arthu      ###   ########.fr       */
+/*   Updated: 2025/11/15 13:52:03 by aline-arthu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ void	finalize_map(t_game *game, char **map_lines)
 	copy_map_lines(game, map_lines);
 	validate_map(game, map_lines);
 	find_player_start(game->map);
-	check_playable_map(game);
+	if (!check_playable_map(game))
+	{
+		free_arr(&map_lines);
+		exit_with_error("Map not playable!", game, NULL);
+	}
 	normalize_map(game);
 }
